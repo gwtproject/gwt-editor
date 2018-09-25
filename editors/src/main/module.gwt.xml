@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="editor">
+  <inherits name="org.gwtproject.dom.DOM"/>
+  <inherits name="org.gwtproject.event.Event"/>
+  <source path="client"/>
+</module>
