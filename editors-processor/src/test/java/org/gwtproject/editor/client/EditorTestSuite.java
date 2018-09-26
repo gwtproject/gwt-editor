@@ -18,6 +18,7 @@ package org.gwtproject.editor.client;
 import com.google.gwt.junit.tools.GWTTestSuite;
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import org.gwtproject.editor.client.adapters.ListEditorWrapperTest;
 import org.gwtproject.editor.client.impl.DelegateMapTest;
 
 public class EditorTestSuite extends GWTTestSuite {
@@ -28,6 +29,7 @@ public class EditorTestSuite extends GWTTestSuite {
     suite.addTestSuite(EditorErrorTest.class);
     suite.addTestSuite(SimpleBeanEditorTest.class);
     suite.addTestSuite(DelegateMapTest.class);
+    suite.addTestSuite(ListEditorWrapperTest.class);
     return suite;
   }
 }

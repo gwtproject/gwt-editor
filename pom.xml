@@ -94,11 +94,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <modules>
-        <module>editors-processor</module>
-        <module>editors</module>
-    </modules>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -279,4 +274,9 @@
             </build>
         </profile>
     </profiles>
+
+    <modules>
+        <module>editors-processor</module>
+        <module>editors</module>
+    </modules>
 </project>
