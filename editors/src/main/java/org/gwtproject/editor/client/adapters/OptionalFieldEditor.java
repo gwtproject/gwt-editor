@@ -25,14 +25,10 @@ import org.gwtproject.editor.client.LeafValueEditor;
  * reassigned as part of the editing process. This consumer of this adapter will typically expose it
  * via the {@link org.gwtproject.editor.client.IsEditor IsEditor} interface:
  *
- * <pre>
- * class FooSelector extends Composite implements IsEditor&lt;OptionalFieldEditor&lt;Foo, FooEditor>> {
- *   private OptionalFieldEditor&lt;Foo, FooEditor> editor = OptionalFieldEditor.of(new FooEditor());
- *   public OptionalFieldEditor&lt;Foo, FooEditor> asEditor() {
- *     return editor;
- *   }
- * }
- * </pre>
+ * <p>&lt;pre&gt; class FooSelector extends Composite implements
+ * IsEditor&lt;OptionalFieldEditor&lt;Foo, FooEditor&gt;&gt; { private OptionalFieldEditor&lt;Foo,
+ * FooEditor&gt; editor = OptionalFieldEditor.of(new FooEditor()); public
+ * OptionalFieldEditor&lt;Foo, FooEditor&gt; asEditor() { return editor; } } &lt;/pre&gt;
  *
  * @param <T> The type of data being managed
  * @param <E> The type of Editor

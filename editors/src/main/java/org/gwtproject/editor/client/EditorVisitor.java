@@ -21,7 +21,7 @@ public class EditorVisitor {
    * Exit an Editor. The default implementation is a no-op.
    *
    * @param ctx contextual data about the current Editor
-   * @param <T>
+   * @param <T> the type of the value
    */
   public <T> void endVisit(EditorContext<T> ctx) {}
 
@@ -29,7 +29,7 @@ public class EditorVisitor {
    * Receive an Editor. The default implementation always returns {@code true}.
    *
    * @param ctx contextual data about the current Editor
-   * @param <T>
+   * @param <T> the type of the value
    * @return {@code true} if the visitor should visit any sub-editors of the current editor.
    */
   public <T> boolean visit(EditorContext<T> ctx) {

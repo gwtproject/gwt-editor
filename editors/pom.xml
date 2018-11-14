@@ -15,16 +15,6 @@
 
     <name>GWT Editors</name>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
-
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-
-        <gwt.version>2.8.2</gwt.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.google.gwt</groupId>

@@ -99,12 +99,9 @@ public class ListEditor<T, E extends Editor<? super T>> implements CompositeEdit
    *
    * <p>Returns null if there is no backing list, and edits cannot be made.
    *
-   * <pre>
-   * ListEditor&lt;Foo, MyFooEditor> listEditor = ListEditor.of(...);
-   * listEditor.setValue(listOfFoo); // Usually called by EditorDriver
-   * listEditor.getList().set(1, new Foo());
-   * listEditor.getEditors().get(1).getFooFieldEditor().setValue(....);
-   * </pre>
+   * <p>&lt;pre&gt; ListEditor&lt;Foo, MyFooEditor&gt; listEditor = ListEditor.of(...);
+   * listEditor.setValue(listOfFoo); // Usually called by EditorDriver listEditor.getList().set(1,
+   * new Foo()); listEditor.getEditors().get(1).getFooFieldEditor().setValue(....); &lt;/pre&gt;
    *
    * @return a live view of the ListEditor's backing data, or <code>null</code> if there is no
    *     backing list.

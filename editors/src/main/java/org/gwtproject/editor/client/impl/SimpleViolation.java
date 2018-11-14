@@ -97,7 +97,13 @@ public abstract class SimpleViolation {
     return new ConstraintViolationIterable(violations);
   }
 
-  /** Maps an abstract representation of a violation into the appropriate EditorDelegate. */
+  /**
+   * Maps an abstract representation of a violation into the appropriate EditorDelegate.
+   *
+   * @param violations the violations list
+   * @param driver the editor driver
+   * @param keyMethod the key method
+   */
   public static void pushViolations(
       Iterable<SimpleViolation> violations, EditorDriver<?> driver, KeyMethod keyMethod) {
     if (violations == null) {
@@ -207,18 +213,32 @@ public abstract class SimpleViolation {
   /** Typically constructed via factory methods. */
   protected SimpleViolation() {}
 
-  /** Return the object that the violation is about. */
+  /**
+   * Return the object that the violation is about.
+   *
+   * @return Object the key object
+   */
   public abstract Object getKey();
 
-  /** Return a user-facing message describing the violation. */
+  /**
+   * Return a user-facing message describing the violation.
+   *
+   * @return String the message
+   */
   public abstract String getMessage();
 
-  /** Return a dotted path describing the property. */
+  /**
+   * Return a dotted path describing the property.
+   *
+   * @return String the path
+   */
   public abstract String getPath();
 
   /**
    * An object that should be available from {@link
    * org.gwtproject.editor.client.EditorError#getUserData()}.
+   *
+   * @return Object the user data object
    */
   public abstract Object getUserDataObject();
 }

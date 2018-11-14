@@ -27,6 +27,7 @@ public class SimpleEditor<T> implements LeafValueEditor<T> {
   /**
    * Returns a new ValueEditor that holds a {@code null} value.
    *
+   * @param <T> the type of data being held
    * @return a SimpleEditor instance holding a {@code null} value
    */
   public static <T> SimpleEditor<T> of() {
@@ -36,6 +37,7 @@ public class SimpleEditor<T> implements LeafValueEditor<T> {
   /**
    * Returns a new ValueEditor that holds the given value.
    *
+   * @param <T> the type of data being held
    * @param value a data object of type T
    * @return a SimpleEditor instance holding the given value
    */

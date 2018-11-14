@@ -29,7 +29,7 @@ public final class EditorHierarchyPrinter extends EditorVisitor {
   /**
    * Produce a string representation of the Editor hierarchy being controlled by {@code driver}.
    *
-   * @param driver
+   * @param driver the editor driver
    * @return String
    */
   public static String toString(EditorDriver<?> driver) {

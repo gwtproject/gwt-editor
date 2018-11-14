@@ -15,8 +15,6 @@
  */
 package org.gwtproject.editor.client;
 
-import org.gwtproject.editor.client.shared.TakesValue;
-
 /**
  * Used to edit non-object or immutable values. The Editor framework will not descend into a
  * LeafValueEditor.
@@ -24,4 +22,20 @@ import org.gwtproject.editor.client.shared.TakesValue;
  * @param <T> The type of primitive value
  * @see org.gwtproject.editor.client.adapters.SimpleEditor
  */
-public interface LeafValueEditor<T> extends Editor<T>, TakesValue<T> {}
+public interface LeafValueEditor<T> extends Editor<T> {
+  /**
+   * Sets the value.
+   *
+   * @param value a value object of type V
+   * @see #getValue()
+   */
+  void setValue(T value);
+
+  /**
+   * Returns the current value.
+   *
+   * @return the value as an object of type V
+   * @see #setValue
+   */
+  T getValue();
+}

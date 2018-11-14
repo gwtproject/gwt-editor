@@ -38,14 +38,14 @@ public class MockSimpleBeanEditorDriver<T, E extends Editor<T>>
   /**
    * A no-op method.
    *
-   * @param visitor
+   * @param visitor the visitor
    */
   public void accept(EditorVisitor visitor) {}
 
   /**
    * Records <code>object</code>.
    *
-   * @param object
+   * @param object target bean
    */
   public void edit(T object) {
     this.object = object;
@@ -99,7 +99,7 @@ public class MockSimpleBeanEditorDriver<T, E extends Editor<T>>
   /**
    * Records <code>editor</code>.
    *
-   * @param editor
+   * @param editor the editor to initialize
    */
   public void initialize(E editor) {
     this.editor = editor;
@@ -117,7 +117,7 @@ public class MockSimpleBeanEditorDriver<T, E extends Editor<T>>
   /**
    * A no-op method that always returns false.
    *
-   * @param violations
+   * @param violations and iterable of violations
    * @return boolean
    */
   public boolean setConstraintViolations(Iterable<ConstraintViolation<?>> violations) {

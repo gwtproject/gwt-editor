@@ -123,7 +123,7 @@ public interface EditorContext<T> {
    * Sets a new value in the data hierarchy being edited. The {@link #checkAssignment(Object)}
    * method may be used to avoid an unsafe generic cast.
    *
-   * @param data
+   * @param data the data
    */
   void setInModel(T data);
 
@@ -133,7 +133,7 @@ public interface EditorContext<T> {
    * structure of a {@link CompositeEditor} even if there are no data elements being edited by that
    * editor.
    *
-   * @param visitor
+   * @param visitor the visitor
    * @throws IllegalStateException if the current Editor is not a CompositeEditor
    */
   void traverseSyntheticCompositeEditor(EditorVisitor visitor);

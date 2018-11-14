@@ -113,7 +113,11 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements 
     return path;
   }
 
-  /** Just returns the last value passed to {@link #setDirty(boolean)}. */
+  /**
+   * Just returns the last value passed to {@link #setDirty(boolean)}.
+   *
+   * @return boolean
+   */
   public boolean isDirty() {
     return dirty;
   }
@@ -135,7 +139,15 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements 
 
   public abstract HandlerRegistration subscribe();
 
-  /** Initialize a sub-delegate whenever one is added to the editor hierarchy. */
+  /**
+   * Initialize a sub-delegate whenever one is added to the editor hierarchy.
+   *
+   * @param <R> the component element type
+   * @param <S> the component editor type
+   * @param subDelegate the sub delegate
+   * @param path the path of the editor
+   * @param subEditor the sub editor
+   */
   protected <R, S extends Editor<R>> void addSubDelegate(
       AbstractEditorDelegate<R, S> subDelegate, String path, S subEditor) {
     subDelegate.initialize(path, subEditor);
@@ -154,7 +166,11 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements 
     editorChain = new Chain<R, S>(editor, composedElementType);
   }
 
-  /** Only implemented by delegates for a {@link CompositeEditor}. */
+  /**
+   * Only implemented by delegates for a {@link CompositeEditor}.
+   *
+   * @return AbstractEditorDelegate
+   */
   protected AbstractEditorDelegate<?, ?> createComposedDelegate() {
     throw new IllegalStateException();
   }
@@ -190,7 +206,12 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements 
 
   protected abstract void setObject(T object);
 
-  /** Indicates whether or not calls to {@link #flush} are expected as part of normal operation. */
+  /**
+   * Indicates whether or not calls to org.gwtproject.editor.client.ValueAwareEditor.flush are
+   * expected as part of normal operation.
+   *
+   * @return boolean default is true
+   */
   protected boolean shouldFlush() {
     return true;
   }

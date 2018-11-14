@@ -113,17 +113,32 @@ public class DelegateMap implements Iterable<AbstractEditorDelegate<?, ?>> {
     return key == null ? null : map.get(key);
   }
 
-  /** Returns a list of EditorDelegates available at a particular absolute path. */
+  /**
+   * Returns a list of EditorDelegates available at a particular absolute path.
+   *
+   * @param path the editor path
+   * @return List&lt;AbstractEditorDelegate&gt;
+   */
   public List<AbstractEditorDelegate<?, ?>> getDelegatesByPath(String path) {
     return delegatesByPath.get(path);
   }
 
-  /** Returns a list of Editors available at a particular absolute path. */
+  /**
+   * Returns a list of Editors available at a particular absolute path.
+   *
+   * @param path the editor path
+   * @return List&lt;Editor&lt;?&gt;&gt;
+   */
   public List<Editor<?>> getEditorByPath(String path) {
     return editorsByPath.get(path);
   }
 
-  /** Accesses the delegate map without using the KeyMethod. */
+  /**
+   * Accesses the delegate map without using the KeyMethod.
+   *
+   * @param key the key
+   * @return List&lt;AbstractEditorDelegate&lt;?, ?&gt;&gt;
+   */
   public List<AbstractEditorDelegate<?, ?>> getRaw(Object key) {
     return map.get(key);
   }
