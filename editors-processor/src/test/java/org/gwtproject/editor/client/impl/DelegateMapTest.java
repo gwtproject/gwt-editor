@@ -15,19 +15,15 @@
  */
 package org.gwtproject.editor.client.impl;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import junit.framework.TestCase;
 import org.gwtproject.editor.client.*;
-import org.gwtproject.editor.client.Address;
-import org.gwtproject.editor.client.AddressEditor;
-import org.gwtproject.editor.client.Person;
 import org.gwtproject.editor.client.adapters.SimpleEditor;
 import org.gwtproject.editor.client.annotation.IsDriver;
 
-/** Tests for DelegateMap. */
-public class DelegateMapTest extends GWTTestCase {
+public class DelegateMapTest extends TestCase {
   class AddressCoEditorView extends AddressEditor implements IsEditor<AddressEditor> {
     private AddressEditor addressEditor = new AddressEditor();
 
@@ -68,11 +64,6 @@ public class DelegateMapTest extends GWTTestCase {
   private DelegateMap map;
   private Person person;
 
-  @Override
-  public String getModuleName() {
-    return "org.gwtproject.editor.EditorProcessorTest";
-  }
-
   public void test() {
     // Test by-object
     assertEquals(Arrays.asList(editor), editors(map, person));
@@ -93,8 +84,7 @@ public class DelegateMapTest extends GWTTestCase {
     assertSame(editor.managerName, map.getEditorByPath("manager.name").get(0));
   }
 
-  @Override
-  protected void gwtSetUp() throws Exception {
+  public void setUp() throws Exception {
     Address a = new Address();
     a.setCity("city");
     a.setStreet("street");

@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>editors-processor</artifactId>
-    <packaging>gwt-lib</packaging>
+    <packaging>jar</packaging>
 
     <name>GWT Editors Processor</name>
 
@@ -81,18 +81,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>net.ltgt.gwt.maven</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <version>1.0-rc-9</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <moduleName>org.gwtproject.editor.EditorProcessorTest</moduleName>
-                    <moduleShortName>EditorProcessorTest</moduleShortName>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

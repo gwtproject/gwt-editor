@@ -112,6 +112,7 @@
                     <version>3.0.1</version>
                     <configuration>
                         <failOnWarnings>false</failOnWarnings>
+                        <failOnError>false</failOnError>
                     </configuration>
                     <executions>
                         <execution>
