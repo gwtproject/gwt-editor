@@ -113,21 +113,21 @@
                     </configuration>
                 </plugin>
                 <!--<plugin>-->
-                    <!--<groupId>org.apache.maven.plugins</groupId>-->
-                    <!--<artifactId>maven-javadoc-plugin</artifactId>-->
-                    <!--<version>3.0.1</version>-->
-                    <!--<configuration>-->
-                        <!--<failOnWarnings>false</failOnWarnings>-->
-                        <!--<failOnError>false</failOnError>-->
-                    <!--</configuration>-->
-                    <!--<executions>-->
-                        <!--<execution>-->
-                            <!--<id>attach-javadocs</id>-->
-                            <!--<goals>-->
-                                <!--<goal>jar</goal>-->
-                            <!--</goals>-->
-                        <!--</execution>-->
-                    <!--</executions>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+                <!--<version>3.0.1</version>-->
+                <!--<configuration>-->
+                <!--<failOnWarnings>false</failOnWarnings>-->
+                <!--<failOnError>false</failOnError>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                <!--<execution>-->
+                <!--<id>attach-javadocs</id>-->
+                <!--<goals>-->
+                <!--<goal>jar</goal>-->
+                <!--</goals>-->
+                <!--</execution>-->
+                <!--</executions>-->
                 <!--</plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -196,8 +196,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
             <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-javadoc-plugin</artifactId>-->
             <!--</plugin>-->
             <plugin>
                 <groupId>com.coveo</groupId>
@@ -219,6 +219,15 @@
             <id>vertispan-snapshots</id>
             <name>Vertispan Snapshots</name>
             <url>https://repo.vertispan.com/gwt-snapshot/</url>
+        </repository>
+        <repository>
+            <id>sonatype-snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
         </repository>
     </repositories>
 
@@ -276,4 +285,5 @@
         <module>editors-processor</module>
         <module>editors</module>
     </modules>
+
 </project>
