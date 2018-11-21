@@ -25,11 +25,7 @@ import javax.validation.ConstraintViolation;
  * @see org.gwtproject.editor.client.SimpleBeanEditorDriver
  */
 public interface EditorDriver<T> {
-  /**
-   * Visit the Editor hierarchy controlled by the EditorDriver.
-   *
-   * @param visitor
-   */
+  /** @param visitor Visit the Editor hierarchy controlled by the EditorDriver */
   void accept(EditorVisitor visitor);
 
   /**
