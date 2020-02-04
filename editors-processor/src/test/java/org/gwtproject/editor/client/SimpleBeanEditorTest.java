@@ -131,6 +131,13 @@ public class SimpleBeanEditorTest extends TestCase {
   interface PersonEditorWithAddressEditorViewDriver
       extends SimpleBeanEditorDriver<Person, PersonEditorWithAddressEditorView> {}
 
+  class SampleView implements Editor<Sample> {
+    SimpleEditor<Integer> id = SimpleEditor.of(0);
+  }
+
+  @IsDriver
+  interface SampleEditorDriver extends SimpleBeanEditorDriver<Sample, SampleView> {}
+
   /** A test for assigning the object associated with an editor to an immediate child editors. */
   class PersonEditorWithAliasedSubEditors implements Editor<Person> {
     @Path("")
