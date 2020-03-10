@@ -23,7 +23,6 @@ import com.squareup.javapoet.*;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.*;
-import javax.annotation.Generated;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.FilerException;
 import javax.annotation.processing.Messager;
@@ -172,10 +171,13 @@ public class DriverProcessingStep implements ProcessingStep {
         TypeSpec.classBuilder(typeName)
             .addOriginatingElement(interfaceToImplement)
             .addModifiers(Modifier.PUBLIC)
-            .addAnnotation(
-                AnnotationSpec.builder(Generated.class)
-                    .addMember("value", "\"$L\"", DriverProcessor.class.getCanonicalName())
-                    .build())
+            // Once GWT supports the new package of the Generated class
+            // we can uncomment this code
+            //            .addAnnotation(
+            //                AnnotationSpec.builder(getGeneratedClassName())
+            //                    .addMember("value", "\"$L\"",
+            // DriverProcessor.class.getCanonicalName())
+            //                    .build())
             .addSuperinterface(TypeName.get(interfaceToImplement.asType()))
             .superclass(
                 ParameterizedTypeName.get(
@@ -213,10 +215,13 @@ public class DriverProcessingStep implements ProcessingStep {
               .addOriginatingElement(types.asElement(data.getEditedType()))
               .addOriginatingElement(types.asElement(data.getEditorType()))
               .addModifiers(Modifier.PUBLIC)
-              .addAnnotation(
-                  AnnotationSpec.builder(Generated.class)
-                      .addMember("value", "\"$L\"", DriverProcessor.class.getCanonicalName())
-                      .build())
+              // Once GWT supports the new package of the Generated class
+              // we can uncomment this code
+              //              .addAnnotation(
+              //                  AnnotationSpec.builder(getGeneratedClassName())
+              //                      .addMember("value", "\"$L\"",
+              // DriverProcessor.class.getCanonicalName())
+              //                      .build())
               .superclass(getEditorDelegateType()); // raw type here, for the same reason as above
 
       NameFactory names = new NameFactory();
@@ -374,10 +379,13 @@ public class DriverProcessingStep implements ProcessingStep {
               .addOriginatingElement(types.asElement(parent.getEditedType())) // bean
               .addOriginatingElement(types.asElement(data.getEditedType())) // child
               .addModifiers(Modifier.PUBLIC)
-              .addAnnotation(
-                  AnnotationSpec.builder(Generated.class)
-                      .addMember("value", "\"$L\"", DriverProcessor.class.getCanonicalName())
-                      .build())
+              // Once GWT supports the new package of the Generated class
+              // we can uncomment this code
+              //                  .addAnnotation(
+              //                  AnnotationSpec.builder(getGeneratedClassName())
+              //                      .addMember("value", "\"$L\"",
+              // DriverProcessor.class.getCanonicalName())
+              //                      .build())
               .superclass(
                   ParameterizedTypeName.get(
                       ClassName.get(AbstractEditorContext.class),
@@ -508,4 +516,15 @@ public class DriverProcessingStep implements ProcessingStep {
     ClassName.get(interfaceToImplement).simpleNames().forEach(joiner::add);
     return joiner.toString();
   }
+
+  // Once GWT supports the new package of the Generated class
+  // we can uncomment this code
+  //  private ClassName getGeneratedClassName() {
+  //    String version = System.getProperty("java.version");
+  //    if (version.startsWith("1.")) {
+  //      return ClassName.get("javax.annotation", "Generated");
+  //    } else {
+  //      return ClassName.get("javax.annotation.processing", "Generated");
+  //    }
+  //  }
 }
