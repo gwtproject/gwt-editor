@@ -111,13 +111,6 @@
             <version>${junit-jupiter-platform.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.dominokit</groupId>
-            <artifactId>domino-ui</artifactId>
-            <version>${domino.version}</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
 </project>

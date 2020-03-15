@@ -41,9 +41,53 @@ public class DriverProcessorTest {
             JavaFileObjects.forResource(
                 "org/gwtproject/editor/processor/test01/result/TestEditor01_Driver_Impl.java"));
     CompilationSubject.assertThat(compilation)
-        .generatedSourceFile("org/gwtproject/editor/processor/test01/TestEditor01_color_Context")
+        .generatedSourceFile("org/gwtproject/editor/processor/test01/TestEditor01_id_Context")
         .hasSourceEquivalentTo(
             JavaFileObjects.forResource(
-                "org/gwtproject/editor/processor/test01/result/TestEditor01_color_Context.java"));
+                "org/gwtproject/editor/processor/test01/result/TestEditor01_id_Context.java"));
+  }
+
+  @Test
+  void testEditor02() {
+    Compilation compilation =
+        javac()
+            .withProcessors(new DriverProcessor())
+            .compile(
+                Arrays.asList(
+                    JavaFileObjects.forResource(
+                        "org/gwtproject/editor/processor/test02/TestEditor02.java")));
+    CompilationSubject.assertThat(compilation).succeeded();
+    CompilationSubject.assertThat(compilation)
+        .generatedSourceFile("org/gwtproject/editor/processor/test02/TestEditor02_Driver_Impl")
+        .hasSourceEquivalentTo(
+            JavaFileObjects.forResource(
+                "org/gwtproject/editor/processor/test02/result/TestEditor02_Driver_Impl.java"));
+    CompilationSubject.assertThat(compilation)
+        .generatedSourceFile("org/gwtproject/editor/processor/test02/TestEditor02_id_Context")
+        .hasSourceEquivalentTo(
+            JavaFileObjects.forResource(
+                "org/gwtproject/editor/processor/test02/result/TestEditor02_id_Context.java"));
+  }
+
+  @Test
+  void testEditor03() {
+    Compilation compilation =
+        javac()
+            .withProcessors(new DriverProcessor())
+            .compile(
+                Arrays.asList(
+                    JavaFileObjects.forResource(
+                        "org/gwtproject/editor/processor/test03/TestEditor03.java")));
+    CompilationSubject.assertThat(compilation).succeeded();
+    CompilationSubject.assertThat(compilation)
+        .generatedSourceFile("org/gwtproject/editor/processor/test03/TestEditor03_Driver_Impl")
+        .hasSourceEquivalentTo(
+            JavaFileObjects.forResource(
+                "org/gwtproject/editor/processor/test03/result/TestEditor03_Driver_Impl.java"));
+    CompilationSubject.assertThat(compilation)
+        .generatedSourceFile("org/gwtproject/editor/processor/test03/TestEditor03_id_Context")
+        .hasSourceEquivalentTo(
+            JavaFileObjects.forResource(
+                "org/gwtproject/editor/processor/test03/result/TestEditor03_id_Context.java"));
   }
 }

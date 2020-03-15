@@ -1,4 +1,4 @@
-package org.gwtproject.editor.processor.test01;
+package org.gwtproject.editor.processor.test02;
 
 import java.lang.Class;
 import java.lang.Object;
@@ -6,12 +6,13 @@ import java.lang.Override;
 import java.lang.String;
 import org.gwtproject.editor.client.Editor;
 import org.gwtproject.editor.client.impl.AbstractEditorContext;
-import org.gwtproject.editor.processor.common.EditorBean;
+import org.gwtproject.editor.processor.common.EditorBeanWithInterface;
 
-public class TestEditor01_color_Context extends AbstractEditorContext<String> {
-  private final EditorBean parent;
+public class TestEditor02_id_Context extends AbstractEditorContext<String> {
+  private final EditorBeanWithInterface parent;
   
-  public TestEditor01_color_Context(EditorBean parent, Editor<String> editor, String path) {
+  public TestEditor02_id_Context(EditorBeanWithInterface parent, Editor<String> editor,
+                                 String path) {
     super(editor, path);
     this.parent = parent;
   }
@@ -33,11 +34,11 @@ public class TestEditor01_color_Context extends AbstractEditorContext<String> {
   
   @Override
   public String getFromModel() {
-    return (parent != null && true) ? parent.getColor() : null;
+    return (parent != null && true) ? parent.getId() : null;
   }
   
   @Override
   public void setInModel(String data) {
-    parent.setColor(data);
+    parent.setId(data);
   }
 }

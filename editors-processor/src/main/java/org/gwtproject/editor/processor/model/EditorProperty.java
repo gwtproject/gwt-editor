@@ -19,6 +19,7 @@ import com.google.auto.common.MoreTypes;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -177,8 +178,13 @@ public class EditorProperty {
                 .map(Element::getEnclosedElements)
                 .flatMap(List::stream)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
+        Set<ExecutableElement> test = ElementFilter.methodsIn(members);
+        ExecutableElement[] list = test.toArray(new ExecutableElement[0]);
         for (ExecutableElement maybeSetter : ElementFilter.methodsIn(members)) {
           BeanMethod which = BeanMethod.which(maybeSetter);
+          //          if (ElementKind.INTERFACE == maybeSetter.getEnclosingElement().getKind()) {
+          //            continue;
+          //          }
           if (BeanMethod.CALL.equals(which)) {
             continue;
           }
