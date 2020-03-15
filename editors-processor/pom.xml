@@ -13,11 +13,16 @@
     <name>GWT Editors Processor</name>
 
     <properties>
-        <javapoet.version>1.12.1</javapoet.version>
         <auto.common.version>0.10</auto.common.version>
         <auto.service.version>1.0-rc6</auto.service.version>
+        <compile-testing.version>0.18</compile-testing.version>
+        <domino.version>1.0-SNAPSHOT</domino.version>
+        <javapoet.version>1.12.1</javapoet.version>
         <compile.testing.version>0.18</compile.testing.version>
+        <junit-jupiter.version>5.4.0</junit-jupiter.version>
+        <junit-jupiter-platform.version>1.4.0</junit-jupiter-platform.version>
         <org.truth.version>0.23</org.truth.version>
+        <truth.version>1.0</truth.version>
     </properties>
 
     <dependencies>
@@ -78,6 +83,40 @@
             <artifactId>editors</artifactId>
             <version>${project.version}</version>
             <classifier>sources</classifier>
+        </dependency>
+
+        <!-- only for testing -->
+        <dependency>
+            <groupId>com.google.truth</groupId>
+            <artifactId>truth</artifactId>
+            <version>${truth.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-runner -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>${junit-jupiter-platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.dominokit</groupId>
+            <artifactId>domino-ui</artifactId>
+            <version>${domino.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

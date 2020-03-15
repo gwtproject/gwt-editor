@@ -457,7 +457,7 @@ public class DriverProcessingStep implements ProcessingStep {
         setInModelMethodBuilder.addStatement("throw new UnsupportedOperationException()");
       } else {
         setInModelMethodBuilder.addStatement(
-            "parent$L.$L(data);", data.getBeanOwnerExpression(), data.getSetterName());
+            "parent$L.$L(data)", data.getBeanOwnerExpression(), data.getSetterName());
       }
       contextTypeBuilder.addMethod(setInModelMethodBuilder.build());
 
