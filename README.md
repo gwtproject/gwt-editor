@@ -1,4 +1,20 @@
 # GWT-EDITORS
+A j2cl ready implementation of the GWT Editor Module ready to use with GWT 2 & J2CL / GWT 3.
+
+### Dependency
+
+```xml
+<dependency>
+    <groupId>org.gwtproject.editor</groupId>
+    <artifactId>gwt-editor</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+<dependency>
+    <groupId>org.gwtproject.editor</groupId>
+    <artifactId>gwt-editor-processor</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
 
 ### Example usage
 
