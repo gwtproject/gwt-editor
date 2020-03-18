@@ -19,9 +19,11 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 import javax.validation.ConstraintViolation;
+import javax.validation.Path;
 import org.gwtproject.editor.client.adapters.EditorSource;
 import org.gwtproject.editor.client.adapters.ListEditor;
 import org.gwtproject.editor.client.annotation.IsDriver;
+import org.gwtproject.validation.client.impl.ConstraintViolationImpl;
 import org.junit.Test;
 
 /** Tests error propagation in generated code. */
@@ -387,22 +389,21 @@ public class EditorErrorTest {
   }
 
   private <T> ConstraintViolation<T> createViolation(String msg, T rootBean, final String path) {
-    //    return new ConstraintViolationImpl.Builder<T>()
-    //        .setMessage(msg)
-    //        .setRootBean(rootBean)
-    //        .setPropertyPath(
-    //            new Path() {
-    //              @Override
-    //              public Iterator<Node> iterator() {
-    //                return null;
-    //              }
-    //
-    //              @Override
-    //              public String toString() {
-    //                return path;
-    //              }
-    //            })
-    //        .build();
-    return null;
+    return new ConstraintViolationImpl.Builder<T>()
+        .setMessage(msg)
+        .setRootBean(rootBean)
+        .setPropertyPath(
+            new Path() {
+              @Override
+              public Iterator<Node> iterator() {
+                return null;
+              }
+
+              @Override
+              public String toString() {
+                return path;
+              }
+            })
+        .build();
   }
 }

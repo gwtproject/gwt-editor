@@ -114,6 +114,9 @@
                 <groupId>com.vertispan.j2cl</groupId>
                 <artifactId>j2cl-maven-plugin</artifactId>
                 <version>${maven.j2cl.plugin}</version>
+                <configuration>
+                    <compilationLevel>ADVANCED</compilationLevel>
+                </configuration>
                 <executions>
                     <execution>
                         <id>j2cl-test</id>
@@ -126,10 +129,9 @@
                                 <gwt.cspCompatModeEnabled>true</gwt.cspCompatModeEnabled>
                                 <gwt.strictCspTestingEnabled>true</gwt.strictCspTestingEnabled>
                             </defines>
-                            <compilationLevel>ADVANCED</compilationLevel>
                             <tests>
                                 <test>org.gwtproject.editor.client.DirtyEditorTest</test>
-<!--                                <test>org.gwtproject.editor.client.EditorErrorTest</test>-->
+                                <test>org.gwtproject.editor.client.EditorErrorTest</test>
                                 <test>org.gwtproject.editor.client.SimpleBeanEditorTest</test>
                                 <test>org.gwtproject.editor.client.impl.DelegateMapTest</test>
                                 <test>org.gwtproject.editor.client.adapters.ListEditorWrapperTest</test>
