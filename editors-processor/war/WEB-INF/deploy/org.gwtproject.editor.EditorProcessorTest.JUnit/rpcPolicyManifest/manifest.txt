@@ -1,4 +1,0 @@
-# Module org.gwtproject.editor.EditorProcessorTest.JUnit
-# RPC service class, partial path of RPC policy file
-com.google.gwt.logging.shared.RemoteLoggingService, 3AB55BE1AC6A8C4CC9B13A0D1DDC66AA.gwt.rpc
-com.google.gwt.junit.client.impl.JUnitHost, 96393FD5B90EFD77EACE5B4F721C3D47.gwt.rpc
