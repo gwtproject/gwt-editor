@@ -1,5 +1,5 @@
-# GWT-EDITORS
-A j2cl ready implementation of the GWT Editor Module ready to use with GWT 2 & J2CL / GWT 3.
+# GWT-EDITOR
+A j2cl ready implementation of the GWT Editor Module ready to use with GWT 2 & J2CL / GWT 3. GWT-Editor will also work in a native Java envirement!
 
 ### Dependency
 
