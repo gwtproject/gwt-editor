@@ -1,7 +1,7 @@
 package org.gwtproject.editor.processor.test03;
 
 import org.gwtproject.editor.processor.common.EditorBeanWithInterface;
-import org.gwtproject.editor.processor.common.WidgetImplementsAsEditor;
+import org.gwtproject.editor.client.testing.FakeLeafValueEditor;
 import org.gwtproject.editor.client.annotation.IsDriver;
 import org.gwtproject.editor.client.Editor;
 import org.gwtproject.editor.client.Editor.Path;
@@ -18,9 +18,9 @@ public class TestEditor03 implements Editor<EditorBeanWithInterface> {
   }
   
   @Path("id")
-  WidgetImplementsAsEditor id;
+  FakeLeafValueEditor<String> id;
   @Path("label")
-  WidgetImplementsAsEditor label;
+  FakeLeafValueEditor<String> label;
   
   public TestEditor03() {
     driver = new TestEditor03_Driver_Impl();

@@ -1,10 +1,7 @@
 package org.gwtproject.editor.processor.test04;
 
 import org.gwtproject.editor.processor.common.UserDto;
-import org.gwtproject.editor.processor.common.WidgetImplementsAsEditor;
-import org.gwtproject.editor.processor.common.WidgetImplementsAsEditorBoolean;
-import org.gwtproject.editor.processor.common.WidgetImplementsAsEditorInteger;
-import org.gwtproject.editor.processor.common.WidgetImplementsAsEditorLong;
+import org.gwtproject.editor.client.testing.FakeLeafValueEditor;
 import org.gwtproject.editor.client.annotation.IsDriver;
 import org.gwtproject.editor.client.Editor;
 import org.gwtproject.editor.client.Editor.Path;
@@ -21,19 +18,19 @@ public class TestEditor04 implements Editor<UserDto> {
   }
   
   @Path("id")
-  WidgetImplementsAsEditorLong id;
+  FakeLeafValueEditor<Long> id;
   @Path("email")
-  WidgetImplementsAsEditor email;
+  FakeLeafValueEditor<String> email;
   @Path("firstName")
-  WidgetImplementsAsEditor firstName;
+  FakeLeafValueEditor<String> firstName;
   @Path("lastName")
-  WidgetImplementsAsEditor lastName;
+  FakeLeafValueEditor<String> lastName;
   @Path("age")
-  WidgetImplementsAsEditorInteger age;
+  FakeLeafValueEditor<Integer> age;
   @Path("phone")
-  WidgetImplementsAsEditor phone;
+  FakeLeafValueEditor<String> phone;
   @Path("active")
-  WidgetImplementsAsEditorBoolean active;
+  FakeLeafValueEditor<Boolean> active;
   
   public TestEditor04() {
     driver = new TestEditor04_Driver_Impl();
