@@ -1,5 +1,7 @@
-# GWT-EDITOR
-A j2cl ready implementation of the GWT Editor Module ready to use with GWT 2 & J2CL / GWT 3. GWT-Editor will also work in a native Java envirement!
+![GWT3/J2CL compatible](https://img.shields.io/badge/GWT3/J2CL-compatible-brightgreen.svg)
+
+# GWT Editor
+GWT Editor module for GWT 2 and J2CL.
 
 ### Dependency
 
@@ -9,12 +11,20 @@ A j2cl ready implementation of the GWT Editor Module ready to use with GWT 2 & J
     <artifactId>gwt-editor</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
-<dependency>
-    <groupId>org.gwtproject.editor</groupId>
-    <artifactId>gwt-editor-processor</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
 ```
+
+### Instructions
+To build gwt-editor:
+
+* run `mvn clean install`
+
+on the parent directory.
+
+To run the j2cl tests:
+
+* switch to the 'gwt-editor-j2cl-tests' directory
+* run `mvn j2cl:clean` & `mvn j2cl:test`
+
 
 ### Example usage
 
