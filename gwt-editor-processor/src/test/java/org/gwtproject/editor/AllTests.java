@@ -14,8 +14,9 @@
  *  the License.
  */
 
-package org.gwtproject.editor.processor;
+package org.gwtproject.editor;
 
+import org.gwtproject.editor.client.EditorTestSuite;
 import org.gwtproject.editor.processor.model.EditorModelTest;
 import org.gwtproject.editor.processor.test.DriverProcessorTest;
 import org.gwtproject.editor.processor.test.ModelUtilsTest;
@@ -23,5 +24,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({DriverProcessorTest.class, EditorModelTest.class, ModelUtilsTest.class})
+@Suite.SuiteClasses({
+  DriverProcessorTest.class,
+  EditorModelTest.class,
+  EditorTestSuite.class,
+  ModelUtilsTest.class
+})
 public class AllTests {}
