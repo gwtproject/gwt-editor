@@ -1,6 +1,6 @@
 package org.gwtproject.editor.processor.common;
 
-public class BadModel01Dto
+public class Model01Generic02Dto<T>
     implements Model01 {
   
   private Long    id;
@@ -8,11 +8,11 @@ public class BadModel01Dto
   private String  phone;
   private String  email;
   
-  public BadModel01Dto() {
+  public Model01Generic02Dto() {
     // jackson serialization
   }
   
-  public BadModel01Dto(Long id,
+  public Model01Generic02Dto(Long id,
                     String name,
                     String phone,
                     String email) {
@@ -38,7 +38,7 @@ public class BadModel01Dto
   }
 
   @Override
-  public BadModel01Dto setName(String name) {
+  public Model01 setName(String name) {
     this.name = name;
     return this;
   }
@@ -55,9 +55,9 @@ public class BadModel01Dto
     return email;
   }
   
-  public String setEmail(String email) {
+  public Model01Generic02Dto<T> setEmail(String email) {
     this.email = email;
-    return "This is a illegal setter";
+    return this;
   }
   
 }

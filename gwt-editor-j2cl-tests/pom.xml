@@ -40,34 +40,6 @@
   </properties>
 
   <dependencies>
-    <!--        &lt;!&ndash; transitive dependencies that aren't correctly available at runtime &ndash;&gt;-->
-    <!--        <dependency>-->
-    <!--            <groupId>com.google.elemental2</groupId>-->
-    <!--            <artifactId>elemental2-promise</artifactId>-->
-    <!--            <version>${elemental2.version}</version>-->
-    <!--            <scope>test</scope>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>com.google.elemental2</groupId>-->
-    <!--            <artifactId>elemental2-dom</artifactId>-->
-    <!--            <version>${elemental2.version}</version>-->
-    <!--            <scope>test</scope>-->
-    <!--        </dependency>-->
-
-    <!-- As the other projects are gwt2, we need to explicitly depend on a j2cl-compatible version of jsinterop-base -->
-    <dependency>
-      <groupId>com.vertispan.jsinterop</groupId>
-      <artifactId>base</artifactId>
-      <version>${jsinterop.base.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>${slf4j.version}</version>
-      <scope>test</scope>
-    </dependency>
-
     <!-- test dependencies -->
     <dependency>
       <groupId>com.vertispan.j2cl</groupId>
@@ -79,13 +51,6 @@
       <groupId>com.vertispan.j2cl</groupId>
       <artifactId>gwttestcase-emul</artifactId>
       <version>${j2cl.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.vertispan.j2cl</groupId>
-      <artifactId>gwttestcase-emul</artifactId>
-      <version>${j2cl.version}</version>
-      <classifier>sources</classifier>
       <scope>test</scope>
     </dependency>
     <dependency>

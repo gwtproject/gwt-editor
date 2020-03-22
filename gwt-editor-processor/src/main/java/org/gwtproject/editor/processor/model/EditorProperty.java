@@ -173,7 +173,7 @@ public class EditorProperty {
                 (TypeElement) types.getTypes().asElement(lookingAt),
                 types.getTypes(),
                 types.getElements())) {
-          BeanMethod which = BeanMethod.which(types.getTypes(), maybeSetter);
+          BeanMethod which = BeanMethod.which(types, maybeSetter);
           if (BeanMethod.CALL.equals(which)) {
             continue;
           }
