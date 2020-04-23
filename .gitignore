@@ -228,3 +228,4 @@ war/
 
 # target folder
 */target/*
+/gwt-editor-processor/dependency-reduced-pom.xml
