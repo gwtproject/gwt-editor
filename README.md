@@ -5,7 +5,8 @@ GWT Editor module for GWT 2 and J2CL.
 
 ### Dependency
 
-Need to be added for the module:
+To add the module:
+
 ```xml
 <dependency>
     <groupId>org.gwtproject.editor</groupId>
@@ -14,7 +15,7 @@ Need to be added for the module:
 </dependency>
 ```
 
-and for the processor:
+and the processor:
 
 ```xml
 <dependency>
