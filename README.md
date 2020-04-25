@@ -5,6 +5,7 @@ GWT Editor module for GWT 2 and J2CL.
 
 ### Dependency
 
+For gwt editor:
 ```xml
 <dependency>
     <groupId>org.gwtproject.editor</groupId>
@@ -12,6 +13,24 @@ GWT Editor module for GWT 2 and J2CL.
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
+
+and the processor add:
+
+```xml
+<dependency>
+  <groupId>org.gwtproject.editor</groupId>
+  <artifactId>gwt-editor-processor</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  <scope>provided</scope>
+</dependency>
+```
+
+In case using running gwt-editors with GWT 2.8.2 or greater, add the following line to your module descriptor:
+```
+<inherits name="org.gwtproject.editor.Editor"/>
+```
+
+Please note, you have to use the classes coming from: `org.gwtproject.editor`. Otherwise your are using the old ones.
 
 ### Instructions
 To build gwt-editor:
