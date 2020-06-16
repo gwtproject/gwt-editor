@@ -3,17 +3,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.gwtproject.editor</groupId>
+    <parent>
+        <groupId>org.gwtproject.editor</groupId>
+        <artifactId>gwt-editor-parent</artifactId>
+        <version>dev</version>
+    </parent>
     <artifactId>gwt-editor-processor</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>jar</packaging>
 
     <name>GWT Editor Processor</name>
-    <description></description>
+<!--    <description></description>-->
     <url>https://github.com/gwtproject/gwt-editor</url>
 
     <organization>
-        <name>The GWT Authors</name>
+        <name>GWT Timer J2CL Tests</name>
         <url>https://github.com/gwtproject</url>
     </organization>
 
@@ -26,7 +30,7 @@
 
     <developers>
         <developer>
-            <name>The GWT Authors</name>
+            <name>GWT Timer J2CL Tests</name>
             <organization>The GWT Project Authors</organization>
             <url>https://github.com/gwtproject</url>
         </developer>
@@ -120,28 +124,9 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-api</artifactId>-->
-<!--            <version>${junit-jupiter.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-engine</artifactId>-->
-<!--            <version>${junit-jupiter.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.junit.platform/junit-platform-runner &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.junit.platform</groupId>-->
-<!--            <artifactId>junit-platform-runner</artifactId>-->
-<!--            <version>${junit-jupiter-platform.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>

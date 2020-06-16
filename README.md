@@ -1,54 +1,87 @@
-![GWT3/J2CL compatible](https://img.shields.io/badge/GWT3/J2CL-compatible-brightgreen.svg)
-
 # GWT Editor
-GWT Editor module for GWT 2 and J2CL.
 
-### Dependency
+![GWT3/J2CL compatible](https://img.shields.io/badge/GWT3/J2CL-compatible-brightgreen.svg)  [![License](https://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html) [![Chat on Gitter](https://badges.gitter.im/hal/elemento.svg)](https://gitter.im/gwtproject/gwt-modules) ![CI](https://github.com/gwtproject/gwt-editor/workflows/CI/badge.svg)
 
-To add the module:
+A future-proof port of the `com.google.gwt.editor.Editor` GWT module, with no dependency on `gwt-user` (besides the Java Runtime Emulation), to prepare for GWT 3 / J2Cl.
 
-```xml
-<dependency>
-    <groupId>org.gwtproject.editor</groupId>
-    <artifactId>gwt-editor</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
-```
+##  Migrating from `com.google.gwt.user.client.Timer`
 
-and the processor:
+1. Add the dependency to your build.
 
-```xml
-<dependency>
-  <groupId>org.gwtproject.editor</groupId>
-  <artifactId>gwt-editor-processor</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  <scope>provided</scope>
-</dependency>
-```
+   For Maven:
 
-In case using running gwt-editors with GWT 2.8.2 or greater, add the following line to your module descriptor:
-```
-<inherits name="org.gwtproject.editor.Editor"/>
-```
+   ```xml
+   <dependency>
+     <groupId>org.gwtproject.editor</groupId>
+     <artifactId>gwt-editor</artifactId>
+     <version>HEAD-SNAPSHOT</version>
+   </dependency>
+   ```
 
-Please note, you have to use the classes coming from: `org.gwtproject.editor`. Otherwise your are using the old ones.
+    and the processor:
 
-### Instructions
-To build gwt-editor:
+    ```xml
+    <dependency>
+      <groupId>org.gwtproject.editor</groupId>
+      <artifactId>gwt-editor-processor</artifactId>
+      <version>HEAD-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    ```
 
-* run `mvn clean install`
+   For Gradle:
 
-on the parent directory.
+   ```gradle
+   implementation("org.gwtproject.editor:gwt-editor:HEAD-SNAPSHOT")
+   ```
 
-To run the j2cl tests:
+    and the processor:
 
-* switch to the 'gwt-editor-j2cl-tests' directory
-* run `mvn j2cl:clean` & `mvn j2cl:test`
+    ```xml
+   ToDo ... 
+    <dependency>
+      <groupId>org.gwtproject.editor</groupId>
+      <artifactId>gwt-editor-processor</artifactId>
+      <version>HEAD-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    ```
+
+2. Update your GWT module to use
+
+   ```xml
+   <inherits name="org.gwtproject.editor.Editor" />
+   ```
+
+3. Change the `import`s in your Java source files:
+
+   ```java
+   import org.gwtproject.editor.client.xxx;
+   ```
+
+## Instructions
+
+To build gwt-event:
+
+* run `mvn clean verify`
+
+on the parent directory. This will build the artifact and run tests against GWT2. THe J2CL test need to be executed with `mvn j2cl:clean` an `mvn j2cl:test` due to a problem with modules that use processors. See: ![https://github.com/Vertispan/j2clmavenplugin/issues/14](https://github.com/Vertispan/j2clmavenplugin/issues/14)
+
+## System Requirements
+
+**GWT Timer requires GWT 2.9.0 or newer!**
 
 
-### Example usage
+## Dependencies
 
-#### the bean
+GWT Editor depends on the following module:
+
+* GWT Event.
+
+
+## Example usage
+
+### the bean
 ```java
 public class Person {
 
@@ -91,7 +124,7 @@ public class Person {
 }
 ```
 
-#### The component
+### The component
 
 > this component uses domino-ui
 
@@ -144,7 +177,7 @@ public class PersonComponent implements IsElement<HTMLDivElement>, Editor<Person
 }
 ```
 
-#### And use it like this
+### And use it like this
 
 ```java
 PersonComponent personComponent = new PersonComponent();

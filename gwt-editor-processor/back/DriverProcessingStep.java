@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 The GWT Authors
+ * Copyright © 2018 GWT Timer J2CL Tests
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.*;
 import javax.annotation.processing.Filer;
-import javax.annotation.processing.FilerException;
 import javax.annotation.processing.Messager;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
@@ -59,37 +58,6 @@ public class DriverProcessingStep implements ProcessingStep {
     this.elements = elements;
   }
 
-  public static class Builder {
-    private Messager messager;
-    private Filer filer;
-    private Types types;
-    private Elements elements;
-
-    public Builder setMessager(Messager messager) {
-      this.messager = messager;
-      return this;
-    }
-
-    public Builder setFiler(Filer filer) {
-      this.filer = filer;
-      return this;
-    }
-
-    public Builder setTypes(Types types) {
-      this.types = types;
-      return this;
-    }
-
-    public Builder setElements(Elements elements) {
-      this.elements = elements;
-      return this;
-    }
-
-    public DriverProcessingStep build() {
-      return new DriverProcessingStep(messager, filer, types, elements);
-    }
-  }
-
   @Override
   public Set<? extends Class<? extends Annotation>> annotations() {
     return Collections.singleton(IsDriver.class);
@@ -112,6 +80,14 @@ public class DriverProcessingStep implements ProcessingStep {
         generateDriver((TypeElement) element, root);
       } catch (IOException e) {
         e.printStackTrace();
+        System.out.println(
+            "Exception: type >>"
+                + root.getEditorType().toString()
+                + " << - trying to write: >>"
+                + ((TypeElement) element).getQualifiedName()
+                + "<< -> message >>"
+                + e.getMessage()
+                + "<< multiple times");
       }
     }
 
@@ -190,8 +166,21 @@ public class DriverProcessingStep implements ProcessingStep {
 
     JavaFile driverFile = JavaFile.builder(pkgName, driverType).build();
 
-    driverFile.writeTo(filer);
-    // end driver
+    try {
+      driverFile.writeTo(filer);
+    } catch (IOException ignored) {
+      System.out.println(
+          "Exception: type >>"
+              + rootEditorModel.getEditorType().toString()
+              + " << - trying to write: >>"
+              + driverFile.packageName
+              + "."
+              + driverType
+              + "<< -> message >>"
+              + ignored.getMessage()
+              + "<< multiple times");
+      // already exists, ignore
+    }
   }
 
   private ClassName getEditorDelegate(EditorModel editorModel, EditorProperty data)
@@ -350,9 +339,22 @@ public class DriverProcessingStep implements ProcessingStep {
       }
 
       JavaFile delegateFile = JavaFile.builder(packageName, delegateTypeBuilder.build()).build();
-
-      delegateFile.writeTo(filer);
-    } catch (FilerException ignored) {
+      try {
+        delegateFile.writeTo(filer);
+      } catch (IOException ignored) {
+        System.out.println(
+            "Exception: type >>"
+                + editorModel.getEditorType().toString()
+                + " << - trying to write: >>"
+                + delegateFile.packageName
+                + "."
+                + delegateSimpleName
+                + "<< -> message >>"
+                + ignored.getMessage()
+                + "<< multiple times");
+        // already exists, ignore
+      }
+    } catch (Exception ignored) {
       // already exists, ignore
     }
 
@@ -462,9 +464,22 @@ public class DriverProcessingStep implements ProcessingStep {
       contextTypeBuilder.addMethod(setInModelMethodBuilder.build());
 
       JavaFile contextFile = JavaFile.builder(packageName, contextTypeBuilder.build()).build();
-
-      contextFile.writeTo(filer);
-    } catch (FilerException ignored) {
+      try {
+        contextFile.writeTo(filer);
+      } catch (IOException ignored) {
+        System.out.println(
+            "Exception: type >>"
+                + parent.getEditorType().toString()
+                + " << - trying to write: >>"
+                + contextFile.packageName
+                + "."
+                + contextSimpleName
+                + "<< -> message >>"
+                + ignored.getMessage()
+                + "<< multiple times");
+      }
+    } catch (Exception ignored) {
+      System.out.println("Exception");
       // already exists, ignore
     }
 
@@ -515,6 +530,38 @@ public class DriverProcessingStep implements ProcessingStep {
     StringJoiner joiner = new StringJoiner("_", "", suffix == null ? "" : suffix);
     ClassName.get(interfaceToImplement).simpleNames().forEach(joiner::add);
     return joiner.toString();
+  }
+
+  public static class Builder {
+
+    private Messager messager;
+    private Filer filer;
+    private Types types;
+    private Elements elements;
+
+    public Builder setMessager(Messager messager) {
+      this.messager = messager;
+      return this;
+    }
+
+    public Builder setFiler(Filer filer) {
+      this.filer = filer;
+      return this;
+    }
+
+    public Builder setTypes(Types types) {
+      this.types = types;
+      return this;
+    }
+
+    public Builder setElements(Elements elements) {
+      this.elements = elements;
+      return this;
+    }
+
+    public DriverProcessingStep build() {
+      return new DriverProcessingStep(messager, filer, types, elements);
+    }
   }
 
   // Once GWT supports the new package of the Generated class
