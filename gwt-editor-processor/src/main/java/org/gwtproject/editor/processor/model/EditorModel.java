@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 The GWT Authors
+ * Copyright © 2018 GWT Timer J2CL Tests
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -97,8 +97,7 @@ public class EditorModel {
         .getTypes()
         .isAssignable(editorType, editorTypes.getLeafValueEditorInterface())) {
       LinkedHashSet<Element> members =
-          ModelUtils.getFlattenedSupertypeHierarchy(editorTypes.getTypes(), editorType)
-              .stream()
+          ModelUtils.getFlattenedSupertypeHierarchy(editorTypes.getTypes(), editorType).stream()
               .map(MoreTypes::asElement)
               .map(Element::getEnclosedElements)
               .flatMap(List::stream)

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 The GWT Authors
+ * Copyright © 2018 GWT Timer J2CL Tests
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,21 +31,21 @@ public enum BeanMethod {
       }
       return super.inferName(method);
     }
-    
+
     @Override
     public boolean matches(EditorTypes types, ExecutableElement method) {
       if (method.getParameters().size() > 0) {
         return false;
       }
-      
+
       if (isBooleanProperty(method)) {
         return true;
       }
-      
+
       String name = method.getSimpleName().toString();
       return name.startsWith(GET_PREFIX) && name.length() > 3;
     }
-    
+
     /**
      * Returns {@code true} if the method matches {@code boolean isFoo()} or {@code boolean
      * hasFoo()} property accessors.
@@ -96,12 +96,12 @@ public enum BeanMethod {
       return true;
     }
   };
-  
+
   private static final String GET_PREFIX = "get";
   private static final String HAS_PREFIX = "has";
   private static final String IS_PREFIX = "is";
   private static final String SET_PREFIX = "set";
-  
+
   /** Determine which Action a method maps to. */
   public static BeanMethod which(EditorTypes types, ExecutableElement method) {
     for (BeanMethod action : BeanMethod.values()) {
@@ -111,7 +111,7 @@ public enum BeanMethod {
     }
     throw new RuntimeException("CALL should have matched");
   }
-  
+
   /** Infer the name of a property from the method. */
   public String inferName(ExecutableElement method) {
     if (this == CALL) {
@@ -120,19 +120,26 @@ public enum BeanMethod {
     }
     return Introspector.decapitalize(method.getSimpleName().toString().substring(3));
   }
-  
+
   private static boolean isReturnTypeEnclosingElement(EditorTypes types, ExecutableElement method) {
     TypeMirror returnTypeMirror = method.getReturnType();
     if (returnTypeMirror == null || returnTypeMirror.toString().equals("void")) {
       return false;
     }
     TypeMirror matchingReturnTM = null;
-    if (types.getTypes().erasure(returnTypeMirror).equals(types.getTypes().erasure(method.getEnclosingElement().asType()))) {
+    if (types
+        .getTypes()
+        .erasure(returnTypeMirror)
+        .equals(types.getTypes().erasure(method.getEnclosingElement().asType()))) {
       matchingReturnTM = method.getEnclosingElement().asType();
     } else {
-      List<? extends TypeMirror> directSupertypes = types.getTypes().directSupertypes(method.getEnclosingElement().asType());
+      List<? extends TypeMirror> directSupertypes =
+          types.getTypes().directSupertypes(method.getEnclosingElement().asType());
       for (TypeMirror superType : directSupertypes) {
-        if (types.getTypes().erasure(returnTypeMirror).equals(types.getTypes().erasure(superType))) {
+        if (types
+            .getTypes()
+            .erasure(returnTypeMirror)
+            .equals(types.getTypes().erasure(superType))) {
           matchingReturnTM = superType;
           break;
         }
@@ -143,7 +150,7 @@ public enum BeanMethod {
     }
     return deepCompare(types, returnTypeMirror, matchingReturnTM);
   }
-  
+
   private static boolean deepCompare(EditorTypes types, TypeMirror source, TypeMirror target) {
     if (!types.getTypes().erasure(source).equals(types.getTypes().erasure(target))) {
       return false;
@@ -154,14 +161,16 @@ public enum BeanMethod {
       return false;
     }
     for (int i = 0; i < sourceTypeArguments.size(); i++) {
-      if (TypeKind.DECLARED == sourceTypeArguments.get(i).getKind() && TypeKind.DECLARED == targetTypeArguments.get(i).getKind()) {
-        if (!deepCompare(types,
-                         sourceTypeArguments.get(i),
-                         targetTypeArguments.get(i))) {
+      if (TypeKind.DECLARED == sourceTypeArguments.get(i).getKind()
+          && TypeKind.DECLARED == targetTypeArguments.get(i).getKind()) {
+        if (!deepCompare(types, sourceTypeArguments.get(i), targetTypeArguments.get(i))) {
           return false;
         }
       } else {
-        if (!types.getTypes().erasure(sourceTypeArguments.get(i)).equals(types.getTypes().erasure(targetTypeArguments.get(i)))) {
+        if (!types
+            .getTypes()
+            .erasure(sourceTypeArguments.get(i))
+            .equals(types.getTypes().erasure(targetTypeArguments.get(i)))) {
           return false;
         }
       }
@@ -169,9 +178,6 @@ public enum BeanMethod {
     return true;
   }
 
-  
-  
   /** Returns {@code true} if the BeanLikeMethod matches the method. */
   public abstract boolean matches(EditorTypes types, ExecutableElement method);
-  
 }
