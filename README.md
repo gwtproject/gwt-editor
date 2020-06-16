@@ -4,7 +4,7 @@
 
 A future-proof port of the `com.google.gwt.editor.Editor` GWT module, with no dependency on `gwt-user` (besides the Java Runtime Emulation), to prepare for GWT 3 / J2Cl.
 
-##  Migrating from `com.google.gwt.user.client.Timer`
+##  Migrating from `com.google.gwt.editor.Editor`
 
 1. Add the dependency to your build.
 
@@ -69,7 +69,7 @@ on the parent directory. This will build the artifact and run tests against GWT2
 
 ## System Requirements
 
-**GWT Timer requires GWT 2.9.0 or newer!**
+**GWT Editor requires GWT 2.9.0 or newer!**
 
 
 ## Dependencies
