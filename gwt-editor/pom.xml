@@ -52,7 +52,7 @@
     <maven.javadoc.plugin>3.2.0</maven.javadoc.plugin>
     <maven.source.plugin>3.2.1</maven.source.plugin>
 
-    <gwt-event.version>HEAD-SNAPSHOT</gwt-event.version>
+    <gwt-event.version>1.0.0-RC1</gwt-event.version>
   </properties>
 
   <dependencies>

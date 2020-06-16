@@ -80,7 +80,8 @@ public class DriverProcessor extends AbstractProcessor {
     this.types = processingEnv.getTypeUtils();
     this.elements = processingEnv.getElementUtils();
 
-    this.createMessage(Diagnostic.Kind.NOTE, "GWT-Editor-Processor started ...");
+    this.createMessage(
+        Diagnostic.Kind.NOTE, "GWT-Editor-Processor (version: HEAD-SNAPSHOT) started ...");
 
     this.stopwatch = Stopwatch.createStarted();
 
