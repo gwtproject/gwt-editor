@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 GWT Timer J2CL Tests
+ * Copyright © 2018 The GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -128,16 +128,7 @@ public class DriverProcessor extends AbstractProcessor {
     this.messager.printMessage(kind, sw.toString());
   }
 
-  private void setUp() {
-    //    this.processorUtils = ProcessorUtils.builder()
-    //                                        .processingEnvironment(processingEnv)
-    //                                        .build();
-    //         get stored Meta Model and use it, if there is one!
-    //    MetaModel restoredModel = this.restore();
-    //    if (!Objects.isNull(restoredModel)) {
-    //      this.metaModel = restoredModel;
-    //    }
-  }
+  private void setUp() {}
 
   protected ClassName getDriverInterfaceType() {
     return ClassName.get(SimpleBeanEditorDriver.class);
@@ -235,7 +226,6 @@ public class DriverProcessor extends AbstractProcessor {
               + "<< -> message >>"
               + e.getMessage()
               + "<< multiple times");
-      // already exists, ignore
     }
   }
 

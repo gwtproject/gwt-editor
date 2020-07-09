@@ -17,7 +17,7 @@
     <url>https://github.com/gwtproject/gwt-editor</url>
 
     <organization>
-        <name>GWT Timer J2CL Tests</name>
+        <name>The GWT Project Authors</name>
         <url>https://github.com/gwtproject</url>
     </organization>
 
@@ -30,7 +30,7 @@
 
     <developers>
         <developer>
-            <name>GWT Timer J2CL Tests</name>
+            <name>GWT Safe HTML Processor</name>
             <organization>The GWT Project Authors</organization>
             <url>https://github.com/gwtproject</url>
         </developer>
