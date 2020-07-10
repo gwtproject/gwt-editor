@@ -65,7 +65,7 @@ To build gwt-event:
 
 * run `mvn clean verify`
 
-on the parent directory. This will build the artifact and run tests against GWT2. THe J2CL test need to be executed with `mvn j2cl:clean` an `mvn j2cl:test` due to a problem with modules that use processors. See: ![https://github.com/Vertispan/j2clmavenplugin/issues/14](https://github.com/Vertispan/j2clmavenplugin/issues/14)
+on the parent directory. This will build the artifact and run tests against GWT2. The J2CL test need to be executed with `mvn j2cl:clean` an `mvn j2cl:test` due to a problem with modules that use processors. See: ![https://github.com/Vertispan/j2clmavenplugin/issues/14](https://github.com/Vertispan/j2clmavenplugin/issues/14)
 
 ## System Requirements
 
