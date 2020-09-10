@@ -61,9 +61,12 @@
         <maven.deploy.plugin>3.0.0-M1</maven.deploy.plugin>
         <maven.flatten.plugin>1.2.2</maven.flatten.plugin>
         <maven.fmt.plugin>2.9</maven.fmt.plugin>
+        <maven.gpg.plugin>1.6</maven.gpg.plugin>
         <maven.install.plugin>3.0.0-M1</maven.install.plugin>
+        <maven.javadoc.plugin>3.2.0</maven.javadoc.plugin>
         <maven.license.plugin>3.0</maven.license.plugin>
         <maven.shade.version>3.2.4</maven.shade.version>
+        <maven.source.plugin>3.2.1</maven.source.plugin>
         <maven.surfire.plugin>3.0.0-M1</maven.surfire.plugin>
     </properties>
 
