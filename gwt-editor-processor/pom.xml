@@ -227,6 +227,11 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- we need to tell Maven to run the flatten-plugin after the shade-plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 </project>

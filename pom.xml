@@ -127,7 +127,7 @@
                 <executions>
                     <execution>
                         <id>flatten</id>
-                        <phase>process-resources</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>flatten</goal>
                         </goals>
@@ -164,11 +164,11 @@
                 <artifactId>gwt-editor</artifactId>
                 <version>${revision}</version>
             </dependency>
-           <dependency>
+            <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>gwt-editor-processor</artifactId>
                 <version>${revision}</version>
-           </dependency>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
