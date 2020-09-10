@@ -88,13 +88,12 @@ public interface ConstraintDescriptor<T extends Annotation> {
   Map<String, Object> getAttributes();
 
   /**
-   * Return a set of composing <code>ConstraintDescriptor</code>s where each
-   * descriptor describes a composing constraint. <code>ConstraintDescriptor</code>
-   * instances of composing constraints reflect overridden attribute values in
-   * {@link #getAttributes()}  and {@link #getAnnotation()}.
+   * Return a set of composing <code>ConstraintDescriptor</code>s where each descriptor describes a
+   * composing constraint. <code>ConstraintDescriptor</code> instances of composing constraints
+   * reflect overridden attribute values in {@link #getAttributes()} and {@link #getAnnotation()}.
    *
-   * @return a set of <code>ConstraintDescriptor<code> objects or an empty set
-   *         in case there are no composing constraints.
+   * @return a set of <code>ConstraintDescriptor</code> objects or an empty set in case there are no
+   *     composing constraints.
    */
   Set<ConstraintDescriptor<?>> getComposingConstraints();
 

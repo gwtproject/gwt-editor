@@ -35,31 +35,25 @@ public interface ConstraintValidatorContext {
   String getDefaultConstraintMessageTemplate();
 
   /**
-   * Return an constraint violation builder building an violation report
-   * allowing to optionally associate it to a sub path.
-   * The violation message will be interpolated.
-   * <p/>
-   * To create the <code>ConstraintViolation</code>, one must call either one of
-   * the #addConstraintViolation() methods available in one of the
-   * interfaces of the fluent API.
-   * If another method is called after #addConstraintViolation() on
-   * <code>ConstraintViolationBuilder</code> or any of its associated nested interfaces
-   * an <code>IllegalStateException</code> is raised.
-   * <p/>
-   * If <code>isValid<code> returns <code>false</code>, a <code>ConstraintViolation</code>
-   * object will be built per ConstraintViolation report including the default one (unless
-   * {@link #disableDefaultConstraintViolation()} has been called).
-   * <p/>
-   * <code>ConstraintViolation</code> objects generated from such a call
-   * contain the same contextual information (root bean, path and so on) unless
-   * the path has been overriden.
-   * <p/>
-   * To create a different <code>ConstraintViolation</code>, a new constraint violation builder
-   * has to be retrieved from <code>ConstraintValidatorContext</code>
+   * Return an constraint violation builder building an violation report allowing to optionally
+   * associate it to a sub path. The violation message will be interpolated.
    *
-   * Here are a few usage examples:
-   * <pre>
-   * {@code
+   * <p>To create the <code>ConstraintViolation</code>, one must call either one of the
+   * #addConstraintViolation() methods available in one of the interfaces of the fluent API. If
+   * another method is called after #addConstraintViolation() on <code>ConstraintViolationBuilder
+   * </code> or any of its associated nested interfaces an <code>IllegalStateException</code> is
+   * raised.
+   *
+   * <p>If <code>isValid</code> returns <code>false</code>, a <code>ConstraintViolation</code>
+   * object will be built per ConstraintViolation report including the default one (unless {@link
+   * #disableDefaultConstraintViolation()} has been called). <code>ConstraintViolation</code>
+   * objects generated from such a call contain the same contextual information (root bean, path and
+   * so on) unless the path has been overriden.
+   *
+   * <p>To create a different <code>ConstraintViolation</code>, a new constraint violation builder
+   * has to be retrieved from <code>ConstraintValidatorContext</code> Here are a few usage examples:
+   *
+   * <pre>{@code
    * // create new violation report with the default path the constraint is located on
    * context.buildConstraintViolationWithTemplate( "way too long" )
    *             .addConstraintViolation();
@@ -78,8 +72,7 @@ public interface ConstraintValidatorContext {
    *                  .inIterable().atKey( "home" )
    *              .addNode( "name" )
    *              .addConstraintViolation();
-   * }
-   * </pre>
+   * }</pre>
    *
    * @param messageTemplate new uninterpolated constraint message.
    * @return Returns an constraint violation builder
@@ -171,10 +164,9 @@ public interface ConstraintValidatorContext {
     }
 
     /**
-     * Represent refinement choices for a node which is
-     * in an <code>Iterator<code> or <code>Map</code>.
-     * If the iterator is an indexed collection or a map,
-     * the index or the key should be set.
+     * Represent refinement choices for a node which is in an <code>Iterator</code> or <code>Map
+     * </code>. If the iterator is an indexed collection or a map, the index or the key should be
+     * set.
      */
     interface NodeContextBuilder {
 
