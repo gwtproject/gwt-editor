@@ -188,7 +188,6 @@
         <snapshotRepository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-<!--            <url>https://repo.vertispan.com/gwt-snapshot/</url>-->
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
