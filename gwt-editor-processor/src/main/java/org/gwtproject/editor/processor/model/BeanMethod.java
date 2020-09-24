@@ -192,7 +192,7 @@ public enum BeanMethod {
   /**
    * Returns {@code true} if the BeanLikeMethod matches the method.
    *
-   * @param types editor type#
+   * @param types editor type
    * @param method executable element
    * @return true, if the BeanLikeMethod matches the method
    */
