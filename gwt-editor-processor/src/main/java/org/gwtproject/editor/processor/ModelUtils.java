@@ -89,12 +89,16 @@ public class ModelUtils {
    * Returns all of the superclasses and superinterfaces for a given type including the type itself.
    * The returned set maintains an internal breadth-first ordering of the type, followed by its
    * interfaces (and their super-interfaces), then the supertype and its interfaces, and so on.
+   *
+   * @param types Utility methods for operating on types
+   * @param typeMirror the type mirror
+   * @return set of type mirrors
    */
-  public static Set<TypeMirror> getFlattenedSupertypeHierarchy(Types types, TypeMirror t) {
+  public static Set<TypeMirror> getFlattenedSupertypeHierarchy(Types types, TypeMirror typeMirror) {
     List<TypeMirror> toAdd = new ArrayList<>();
     LinkedHashSet<TypeMirror> result = new LinkedHashSet<>();
 
-    toAdd.add(t);
+    toAdd.add(typeMirror);
 
     for (int i = 0; i < toAdd.size(); i++) {
       TypeMirror type = toAdd.get(i);

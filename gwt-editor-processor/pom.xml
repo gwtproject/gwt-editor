@@ -13,7 +13,6 @@
     <packaging>jar</packaging>
 
     <name>GWT Editor Processor</name>
-<!--    <description></description>-->
     <url>https://github.com/gwtproject/gwt-editor</url>
 
     <organization>
@@ -59,6 +58,8 @@
         <junit.version>4.13</junit.version>
         <org.truth.version>0.23</org.truth.version>
         <truth.version>1.0</truth.version>
+
+        <maven.shade.plugin>3.2.4</maven.shade.plugin>
     </properties>
 
     <dependencies>
@@ -199,6 +200,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven.shade.plugin}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -231,6 +233,13 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -287,3 +296,4 @@
         </profile>
     </profiles>
 </project>
+

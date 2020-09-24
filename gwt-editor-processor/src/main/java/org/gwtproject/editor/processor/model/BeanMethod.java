@@ -102,7 +102,13 @@ public enum BeanMethod {
   private static final String IS_PREFIX = "is";
   private static final String SET_PREFIX = "set";
 
-  /** Determine which Action a method maps to. */
+  /**
+   * Determine which Action a method maps to.
+   *
+   * @param types editor types
+   * @param method method to execute
+   * @return matching method
+   */
   public static BeanMethod which(EditorTypes types, ExecutableElement method) {
     for (BeanMethod action : BeanMethod.values()) {
       if (action.matches(types, method)) {
@@ -112,7 +118,12 @@ public enum BeanMethod {
     throw new RuntimeException("CALL should have matched");
   }
 
-  /** Infer the name of a property from the method. */
+  /**
+   * Infer the name of a property from the method.
+   *
+   * @param method executable method
+   * @return name of executable method
+   */
   public String inferName(ExecutableElement method) {
     if (this == CALL) {
       throw new UnsupportedOperationException(
@@ -178,6 +189,12 @@ public enum BeanMethod {
     return true;
   }
 
-  /** Returns {@code true} if the BeanLikeMethod matches the method. */
+  /**
+   * Returns {@code true} if the BeanLikeMethod matches the method.
+   *
+   * @param types editor type
+   * @param method executable element
+   * @return true, if the BeanLikeMethod matches the method
+   */
   public abstract boolean matches(EditorTypes types, ExecutableElement method);
 }

@@ -338,12 +338,20 @@ public class EditorProperty {
   private String setterName;
   private String simpleExpression;
 
-  /** Returns a complete expression to retrieve the editor. */
+  /**
+   * Returns a complete expression to retrieve the editor.
+   *
+   * @return expression
+   */
   public String getExpression() {
     return editorExpression;
   }
 
-  /** Returns the complete path of the editor, relative to the root object. */
+  /**
+   * Returns the complete path of the editor, relative to the root object.
+   *
+   * @return path
+   */
   public String getPath() {
     return path;
   }
@@ -408,7 +416,11 @@ public class EditorProperty {
     return simpleExpression;
   }
 
-  /** Gets the path specified by the {@code @Path} annotation or inferred via convention. */
+  /**
+   * Gets the path specified by the {@code @Path} annotation or inferred via convention.
+   *
+   * @return declared path
+   */
   public String getDeclaredPath() {
     return declaredPath;
   }
