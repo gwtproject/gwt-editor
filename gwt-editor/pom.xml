@@ -71,6 +71,11 @@
           <moduleName>org.gwtproject.editor.Editor</moduleName>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>${maven.deploy.plugin}</version>
+      </plugin>
     </plugins>
   </build>
 
