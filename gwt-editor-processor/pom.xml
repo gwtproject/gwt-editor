@@ -211,9 +211,10 @@
                             <artifactSet>
                                 <excludes>
                                     <exclude>org.gwtproject.editor:gwt-editor</exclude>
+                                    <exclude>org.gwtproject.event:gwt-event</exclude>
                                     <exclude>com.google.auto.service:*</exclude>
-                                    <exclude>com.squareup.javapoet:*</exclude>
                                     <exclude>javax.annotation:javax.annotation-api</exclude>
+                                    <exclude>javax.validation:validation-api</exclude>
                                     <exclude>com.google.code.findbugs:jsr305</exclude>
                                     <exclude>com.google.j2objc:j2objc-annotations</exclude>
                                     <exclude>com.google.errorprone:error_prone_annotations</exclude>
@@ -221,10 +222,37 @@
                             </artifactSet>
                             <relocations>
                                 <relocation>
-                                    <pattern>com.google.auto.common</pattern>
-                                    <shadedPattern>org.gwtproject.editor.shaded.auto.common</shadedPattern>
+                                    <pattern>com</pattern>
+                                    <shadedPattern>org.gwtproject.editor.shaded.com</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>afu</pattern>
+                                    <shadedPattern>org.gwtproject.editor.shaded.afu</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.codehaus</pattern>
+                                    <shadedPattern>org.gwtproject.editor.shaded.org.codehaus</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.checkerframework</pattern>
+                                    <shadedPattern>org.gwtproject.editor.shaded.org.checkerframework</shadedPattern>
                                 </relocation>
                             </relocations>
+                            <createSourcesJar>true</createSourcesJar>
+                            <filters>
+                                <filter>
+                                    <artifact>com.google.auto:auto-common</artifact>
+                                    <excludes>
+                                        <exclude>**/*.java</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/MANIFEST.MF</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>
