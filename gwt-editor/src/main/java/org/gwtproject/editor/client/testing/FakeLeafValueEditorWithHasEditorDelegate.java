@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gwtproject.editor.client;
+package org.gwtproject.editor.client.testing;
 
-import org.gwtproject.editor.client.adapters.SimpleEditor;
+import org.gwtproject.editor.client.EditorDelegate;
+import org.gwtproject.editor.client.HasEditorDelegate;
 
-/** Simple editor used by multiple tests. */
-public class PersonEditor implements Editor<Person> {
-  public AddressEditor addressEditor = new AddressEditor();
-  public SimpleEditor<Long> localTime = SimpleEditor.of(System.currentTimeMillis());
-  public SimpleEditor<String> name = SimpleEditor.of(SimpleBeanEditorTest.UNINITIALIZED);
+/**
+ * A no-op Editor.
+ *
+ * @param <T> the type not being edited
+ */
+public class FakeLeafValueEditorWithHasEditorDelegate<T> extends FakeLeafValueEditor<T>
+    implements HasEditorDelegate<T> {
 
-  @Path("manager.name")
-  public SimpleEditor<String> managerName = SimpleEditor.of(SimpleBeanEditorTest.UNINITIALIZED);
+  @Override
+  public void setDelegate(EditorDelegate<T> delegate) {}
 }

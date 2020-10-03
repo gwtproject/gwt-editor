@@ -295,7 +295,7 @@ public class SimpleBeanEditorTest {
     }
   }
 
-  class ValueAwareAddressEditor extends AddressEditor implements ValueAwareEditor<Address> {
+  public class ValueAwareAddressEditor extends AddressEditor implements ValueAwareEditor<Address> {
     int flushCalled;
     int setDelegateCalled;
     int setValueCalled;

@@ -37,15 +37,15 @@ public class SimpleBeanEditorTest extends TestCase {
     }
   }
 
-  class AddressEditorPartOne implements Editor<Address> {
+  public static class AddressEditorPartOne implements Editor<Address> {
     SimpleEditor<String> city = SimpleEditor.of(UNINITIALIZED);
   }
 
-  class AddressEditorPartTwo implements Editor<Address> {
+  public static class AddressEditorPartTwo implements Editor<Address> {
     SimpleEditor<String> street = SimpleEditor.of(UNINITIALIZED);
   }
 
-  class AddressEditorView implements IsEditor<LeafAddressEditor> {
+  public static class AddressEditorView implements IsEditor<LeafAddressEditor> {
     LeafAddressEditor addressEditor = new LeafAddressEditor();
 
     @Override
@@ -54,7 +54,7 @@ public class SimpleBeanEditorTest extends TestCase {
     }
   }
 
-  static class DepartmentWithList extends Department {
+  public static class DepartmentWithList extends Department {
     List<Intern> interns = new ArrayList<Intern>();
 
     public List<Intern> getInterns() {
@@ -66,7 +66,7 @@ public class SimpleBeanEditorTest extends TestCase {
     }
   }
 
-  static class DepartmentWithListEditor implements Editor<DepartmentWithList> {
+  public static class DepartmentWithListEditor implements Editor<DepartmentWithList> {
     PersonEditor manager = new PersonEditor();
     ListEditor<Intern, PersonEditor> interns =
         ListEditor.of(
@@ -85,7 +85,7 @@ public class SimpleBeanEditorTest extends TestCase {
   /**
    * See <a href="http://code.google.com/p/google-web-toolkit/issues/detail?id=6016" >issue 6016</a>
    */
-  static class EditorWithGenericSubEditors implements Editor<Department> {
+  public static class EditorWithGenericSubEditors implements Editor<Department> {
 
     PersonGenericEditor<Manager> manager = new PersonGenericEditor<Manager>();
 
@@ -96,7 +96,7 @@ public class SimpleBeanEditorTest extends TestCase {
   interface EditorWithGenericSubEditorsDriver
       extends SimpleBeanEditorDriver<Department, EditorWithGenericSubEditors> {}
 
-  class LeafAddressEditor extends AddressEditor implements LeafValueEditor<Address> {
+  public static class LeafAddressEditor extends AddressEditor implements LeafValueEditor<Address> {
     /*
      * These two fields are used to ensure that getValue() and setValue() aren't
      * called excessively.
@@ -122,7 +122,7 @@ public class SimpleBeanEditorTest extends TestCase {
   interface ListEditorDriver
       extends SimpleBeanEditorDriver<List<String>, ListEditor<String, SimpleEditor<String>>> {}
 
-  class PersonEditorWithAddressEditorView implements Editor<Person> {
+  public static class PersonEditorWithAddressEditorView implements Editor<Person> {
     AddressEditorView addressEditor = new AddressEditorView();
     SimpleEditor<String> name = SimpleEditor.of(UNINITIALIZED);
   }
@@ -139,7 +139,7 @@ public class SimpleBeanEditorTest extends TestCase {
   interface SampleEditorDriver extends SimpleBeanEditorDriver<Sample, SampleView> {}
 
   /** A test for assigning the object associated with an editor to an immediate child editors. */
-  class PersonEditorWithAliasedSubEditors implements Editor<Person> {
+  public static class PersonEditorWithAliasedSubEditors implements Editor<Person> {
     @Path("")
     PersonEditor e1 = new PersonEditor();
 
@@ -160,7 +160,8 @@ public class SimpleBeanEditorTest extends TestCase {
   interface PersonEditorWithCoAddressEditorViewDriver
       extends SimpleBeanEditorDriver<Person, PersonEditorWithCoAddressEditorView> {}
 
-  static class PersonEditorWithDelegate extends PersonEditor implements HasEditorDelegate<Person> {
+  public static class PersonEditorWithDelegate extends PersonEditor
+      implements HasEditorDelegate<Person> {
     EditorDelegate<Person> delegate;
 
     @Override
@@ -173,7 +174,7 @@ public class SimpleBeanEditorTest extends TestCase {
   interface PersonEditorWithDelegateDriver
       extends SimpleBeanEditorDriver<Person, PersonEditorWithDelegate> {}
 
-  class PersonEditorWithLeafAddressEditor implements Editor<Person> {
+  public static class PersonEditorWithLeafAddressEditor implements Editor<Person> {
     LeafAddressEditor addressEditor = new LeafAddressEditor();
     SimpleEditor<String> name = SimpleEditor.of(UNINITIALIZED);
 
@@ -185,7 +186,7 @@ public class SimpleBeanEditorTest extends TestCase {
   interface PersonEditorWithLeafAddressEditorDriver
       extends SimpleBeanEditorDriver<Person, PersonEditorWithLeafAddressEditor> {}
 
-  class PersonEditorWithManagerNameWithDelegate implements Editor<Person> {
+  public static class PersonEditorWithManagerNameWithDelegate implements Editor<Person> {
     @Path("manager.name")
     SimpleEditorWithDelegate<String> managerName =
         new SimpleEditorWithDelegate<String>(UNINITIALIZED);
@@ -195,7 +196,7 @@ public class SimpleBeanEditorTest extends TestCase {
   interface PersonEditorWithManagerNameWithDelegateDriver
       extends SimpleBeanEditorDriver<Person, PersonEditorWithManagerNameWithDelegate> {}
 
-  class PersonEditorWithMultipleBindings implements Editor<Person> {
+  public static class PersonEditorWithMultipleBindings implements Editor<Person> {
     @Path("address")
     AddressEditorPartOne one = new AddressEditorPartOne();
 
@@ -211,7 +212,7 @@ public class SimpleBeanEditorTest extends TestCase {
   interface PersonEditorWithOptionalAddressDriver
       extends SimpleBeanEditorDriver<Person, PersonEditorWithOptionalAddressEditor> {}
 
-  static class PersonEditorWithOptionalAddressEditor implements Editor<Person> {
+  public static class PersonEditorWithOptionalAddressEditor implements Editor<Person> {
     OptionalFieldEditor<Address, AddressEditor> address;
     SimpleEditor<String> name = SimpleEditor.of(UNINITIALIZED);
 
@@ -277,7 +278,8 @@ public class SimpleBeanEditorTest extends TestCase {
   interface PersonWithListEditorDriver
       extends SimpleBeanEditorDriver<PersonWithList, PersonWithListEditor> {}
 
-  class SimpleEditorWithDelegate<T> extends SimpleEditor<T> implements HasEditorDelegate<T> {
+  public static class SimpleEditorWithDelegate<T> extends SimpleEditor<T>
+      implements HasEditorDelegate<T> {
     EditorDelegate<T> delegate;
 
     public SimpleEditorWithDelegate(T value) {
@@ -290,7 +292,8 @@ public class SimpleBeanEditorTest extends TestCase {
     }
   }
 
-  class ValueAwareAddressEditor extends AddressEditor implements ValueAwareEditor<Address> {
+  public static class ValueAwareAddressEditor extends AddressEditor
+      implements ValueAwareEditor<Address> {
     int flushCalled;
     int setDelegateCalled;
     int setValueCalled;

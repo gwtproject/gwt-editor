@@ -31,6 +31,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
@@ -272,13 +273,35 @@ public class DriverProcessor extends AbstractProcessor {
             //                      .addMember("value", "\"$L\"",
             // DriverProcessor.class.getCanonicalName())
             //                      .build())
-            .superclass(getEditorDelegateType()); // raw type here, for the same reason as above
+            .superclass(
+                ParameterizedTypeName.get(
+                    getEditorDelegateType(),
+                    ClassName.get(data.getEditedType()),
+                    ClassName.get(
+                        data.getEditorType()))); // raw type here, for the same reason as above
 
     NameFactory names = new NameFactory();
     Map<EditorProperty, String> delegateFields = new IdentityHashMap<>();
 
-    delegateTypeBuilder.addField(
-        FieldSpec.builder(rawEditorType, "editor", Modifier.PRIVATE).build());
+    if (((DeclaredType) data.getEditorType()).getTypeArguments().size() == 2) {
+      delegateTypeBuilder.addField(
+          ParameterizedTypeName.get(
+              ClassName.get((TypeElement) types.asElement(data.getEditorType())),
+              ClassName.get(((DeclaredType) data.getEditorType()).getTypeArguments().get(0)),
+              ClassName.get(((DeclaredType) data.getEditorType()).getTypeArguments().get(1))),
+          "editor",
+          Modifier.PRIVATE);
+    } else if (((DeclaredType) data.getEditorType()).getTypeArguments().size() == 1) {
+      delegateTypeBuilder.addField(
+          ParameterizedTypeName.get(
+              ClassName.get((TypeElement) types.asElement(data.getEditorType())),
+              ClassName.get(((DeclaredType) data.getEditorType()).getTypeArguments().get(0))),
+          "editor",
+          Modifier.PRIVATE);
+    } else {
+      delegateTypeBuilder.addField(
+          FieldSpec.builder(rawEditorType, "editor", Modifier.PRIVATE).build());
+    }
     names.addName("editor");
     delegateTypeBuilder.addField(
         FieldSpec.builder(ClassName.get(data.getEditedType()), "object", Modifier.PRIVATE).build());
@@ -290,7 +313,12 @@ public class DriverProcessor extends AbstractProcessor {
         String fieldName = names.createName(d.getPropertyName() + "Delegate");
         delegateFields.put(d, fieldName);
         delegateTypeBuilder.addField(
-            getEditorDelegateType(), fieldName, Modifier.PRIVATE); // TODO parameterize
+            ParameterizedTypeName.get(
+                getEditorDelegateType(),
+                ClassName.get(d.getEditedType()),
+                ClassName.get(d.getEditorType())),
+            fieldName,
+            Modifier.PRIVATE);
       }
     }
 
@@ -307,8 +335,8 @@ public class DriverProcessor extends AbstractProcessor {
             .addModifiers(Modifier.PROTECTED)
             .returns(void.class)
             .addAnnotation(Override.class)
-            .addParameter(Editor.class, "editor")
-            .addStatement("this.editor = ($T) editor", rawEditorType)
+            .addParameter(ClassName.get(data.getEditorType()), "editor")
+            .addStatement("this.editor = editor")
             .build());
 
     delegateTypeBuilder.addMethod(
@@ -324,8 +352,8 @@ public class DriverProcessor extends AbstractProcessor {
             .addModifiers(Modifier.PROTECTED)
             .returns(void.class)
             .addAnnotation(Override.class)
-            .addParameter(ClassName.get(Object.class), "object")
-            .addStatement("this.object = ($T) object", ClassName.get(data.getEditedType()))
+            .addParameter(ClassName.get(data.getEditedType()), "object")
+            .addStatement("this.object = object")
             .build());
 
     MethodSpec.Builder initializeSubDelegatesBuilder =
