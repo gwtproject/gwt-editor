@@ -612,8 +612,7 @@ public class SimpleBeanEditorTest extends TestCase {
         rawData,
         Arrays.asList(
             editors.get(0).getValue(), editors.get(1).getValue(), editors.get(2).getValue()));
-    assertEquals(editors,
-                 new ArrayList<>(positionMap.values()));
+    assertEquals(editors, new ArrayList<>(positionMap.values()));
 
     List<String> mutableList = editor.getList();
     assertEquals(rawData, mutableList);
@@ -632,8 +631,7 @@ public class SimpleBeanEditorTest extends TestCase {
     mutableList.add("quux");
     assertEquals(4, editors.size());
     assertEquals("quux", editors.get(3).getValue());
-    assertEquals(editors,
-                 new ArrayList<>(positionMap.values()));
+    assertEquals(editors, new ArrayList<>(positionMap.values()));
 
     // Delete an element
     SimpleEditor<String> expectedDisposed = editors.get(0);
@@ -641,8 +639,7 @@ public class SimpleBeanEditorTest extends TestCase {
     assertSame(expectedDisposed, disposed[0]);
     assertEquals(3, editors.size());
     assertEquals("quux", editors.get(2).getValue());
-    assertEquals(editors,
-                 new ArrayList<>(positionMap.values()));
+    assertEquals(editors, new ArrayList<>(positionMap.values()));
 
     // Change list outside editor: shouldn't impact editors
     rawData.clear();
@@ -654,8 +651,7 @@ public class SimpleBeanEditorTest extends TestCase {
         expectedList,
         Arrays.asList(
             editors.get(0).getValue(), editors.get(1).getValue(), editors.get(2).getValue()));
-    assertEquals(editors,
-                 new ArrayList<>(positionMap.values()));
+    assertEquals(editors, new ArrayList<>(positionMap.values()));
 
     // Edit again: should reuse sub-editors and dispose unneeded ones
     disposed[0] = null;
