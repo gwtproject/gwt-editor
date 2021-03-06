@@ -31,7 +31,8 @@ public class EditorErrorTest extends GWTTestCase {
     return "org.gwtproject.editor.EditorGwt2Test";
   }
 
-  class AddressEditorWithErrors extends AddressEditor implements ValueAwareEditor<Address> {
+  public static class AddressEditorWithErrors extends AddressEditor
+      implements ValueAwareEditor<Address> {
 
     private EditorDelegate<Address> delegate;
 
@@ -52,7 +53,8 @@ public class EditorErrorTest extends GWTTestCase {
     public void setValue(Address value) {}
   }
 
-  class AddressEditorReceivesErrors extends AddressEditor implements HasEditorErrors<Address> {
+  public static class AddressEditorReceivesErrors extends AddressEditor
+      implements HasEditorErrors<Address> {
     List<EditorError> errors;
 
     @Override
@@ -64,7 +66,8 @@ public class EditorErrorTest extends GWTTestCase {
     }
   }
 
-  class PersonEditorReceivesErrors extends PersonEditor implements HasEditorErrors<Person> {
+  public static class PersonEditorReceivesErrors extends PersonEditor
+      implements HasEditorErrors<Person> {
     List<EditorError> errors;
 
     @Override
@@ -76,7 +79,7 @@ public class EditorErrorTest extends GWTTestCase {
     }
   }
 
-  class Workgroup {
+  public static class Workgroup {
     List<Person> people = new ArrayList<Person>();
 
     List<Person> getPeople() {
@@ -84,7 +87,7 @@ public class EditorErrorTest extends GWTTestCase {
     }
   }
 
-  class WorkgroupEditor implements HasEditorErrors<Workgroup> {
+  public static class WorkgroupEditor implements HasEditorErrors<Workgroup> {
     ListEditor<Person, PersonEditor> people =
         ListEditor.of(
             new EditorSource<PersonEditor>() {
@@ -107,7 +110,7 @@ public class EditorErrorTest extends GWTTestCase {
   @IsDriver
   interface WorkgroupEditorDriver extends SimpleBeanEditorDriver<Workgroup, WorkgroupEditor> {}
 
-  class WorkgroupNestedErrorsEditor implements HasEditorErrors<Workgroup> {
+  public static class WorkgroupNestedErrorsEditor implements HasEditorErrors<Workgroup> {
     ListEditor<Person, PersonEditorReceivesErrors> people =
         ListEditor.of(
             new EditorSource<PersonEditorReceivesErrors>() {

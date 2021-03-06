@@ -18,7 +18,7 @@ package org.gwtproject.editor.client;
 import org.gwtproject.editor.client.adapters.SimpleEditor;
 
 /** Simple editor used by multiple tests. */
-class PersonEditor implements Editor<Person> {
+public class PersonEditor implements Editor<Person> {
   public AddressEditor addressEditor = new AddressEditor();
   public SimpleEditor<Long> localTime = SimpleEditor.of(System.currentTimeMillis());
   public SimpleEditor<String> name = SimpleEditor.of(SimpleBeanEditorTest.UNINITIALIZED);
