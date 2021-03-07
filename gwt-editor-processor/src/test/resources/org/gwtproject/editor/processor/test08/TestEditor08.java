@@ -19,7 +19,7 @@ public class TestEditor08 implements Editor<Model01Dto> {
   }
   
   FakeLeafValueEditorWithHasEditorDelegate<Long> id;
-  FakeLeafValueEditorWithHasEditorDelegate<String>                    name;
+  FakeLeafValueEditorWithHasEditorDelegate<String> name;
   FakeLeafValueEditorWithHasEditorDelegate<String> phone;
   FakeLeafValueEditorWithHasEditorDelegate<String> email;
   

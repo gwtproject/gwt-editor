@@ -31,7 +31,6 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
@@ -149,7 +148,7 @@ public class DriverProcessor extends AbstractProcessor {
     String typeName = createNameFromEnclosedTypes(interfaceToImplement, "_Impl");
 
     String classNameToGenerate = pkgName + "." + typeName;
-    // check, if tyoename is already generatd ...
+    // check, if typename is already generated ...
     if (this.generatedDelegates.contains(classNameToGenerate)) {
       // alreday generated ... nothing to do
       return;
@@ -260,7 +259,7 @@ public class DriverProcessor extends AbstractProcessor {
             .toString();
 
     String classNameToGenerate = packageName + "." + delegateSimpleName;
-    // check, if delegate is already generatd ...
+    // check, if delegate is already generated ...
     if (this.generatedDelegates.contains(classNameToGenerate)) {
       // alreday generated ... nothing to do
       return ClassName.get(packageName, delegateSimpleName);
@@ -281,35 +280,13 @@ public class DriverProcessor extends AbstractProcessor {
             //                      .addMember("value", "\"$L\"",
             // DriverProcessor.class.getCanonicalName())
             //                      .build())
-            .superclass(
-                ParameterizedTypeName.get(
-                    getEditorDelegateType(),
-                    ClassName.get(data.getEditedType()),
-                    ClassName.get(
-                        data.getEditorType()))); // raw type here, for the same reason as above
+            .superclass(getEditorDelegateType()); // raw type here, for the same reason as above
 
     NameFactory names = new NameFactory();
     Map<EditorProperty, String> delegateFields = new IdentityHashMap<>();
 
-    if (((DeclaredType) data.getEditorType()).getTypeArguments().size() == 2) {
-      delegateTypeBuilder.addField(
-          ParameterizedTypeName.get(
-              ClassName.get((TypeElement) types.asElement(data.getEditorType())),
-              ClassName.get(((DeclaredType) data.getEditorType()).getTypeArguments().get(0)),
-              ClassName.get(((DeclaredType) data.getEditorType()).getTypeArguments().get(1))),
-          "editor",
-          Modifier.PRIVATE);
-    } else if (((DeclaredType) data.getEditorType()).getTypeArguments().size() == 1) {
-      delegateTypeBuilder.addField(
-          ParameterizedTypeName.get(
-              ClassName.get((TypeElement) types.asElement(data.getEditorType())),
-              ClassName.get(((DeclaredType) data.getEditorType()).getTypeArguments().get(0))),
-          "editor",
-          Modifier.PRIVATE);
-    } else {
-      delegateTypeBuilder.addField(
-          FieldSpec.builder(rawEditorType, "editor", Modifier.PRIVATE).build());
-    }
+    delegateTypeBuilder.addField(
+        FieldSpec.builder(rawEditorType, "editor", Modifier.PRIVATE).build());
     names.addName("editor");
     delegateTypeBuilder.addField(
         FieldSpec.builder(ClassName.get(data.getEditedType()), "object", Modifier.PRIVATE).build());
@@ -321,17 +298,10 @@ public class DriverProcessor extends AbstractProcessor {
         String fieldName = names.createName(d.getPropertyName() + "Delegate");
         delegateFields.put(d, fieldName);
         delegateTypeBuilder.addField(
-            ParameterizedTypeName.get(
-                getEditorDelegateType(),
-                ClassName.get(d.getEditedType()),
-                ClassName.get(d.getEditorType())),
-            fieldName,
-            Modifier.PRIVATE);
+            getEditorDelegateType(), fieldName, Modifier.PRIVATE); // TODO parameterize
       }
     }
 
-    //    asdsadasdasd
-    TypeName returnTypes;
     delegateTypeBuilder.addMethod(
         MethodSpec.methodBuilder("getEditor")
             .addModifiers(Modifier.PROTECTED)
@@ -345,8 +315,8 @@ public class DriverProcessor extends AbstractProcessor {
             .addModifiers(Modifier.PROTECTED)
             .returns(void.class)
             .addAnnotation(Override.class)
-            .addParameter(ClassName.get(data.getEditorType()), "editor")
-            .addStatement("this.editor = editor")
+            .addParameter(Editor.class, "editor")
+            .addStatement("this.editor = ($T) editor", rawEditorType)
             .build());
 
     delegateTypeBuilder.addMethod(
@@ -362,8 +332,8 @@ public class DriverProcessor extends AbstractProcessor {
             .addModifiers(Modifier.PROTECTED)
             .returns(void.class)
             .addAnnotation(Override.class)
-            .addParameter(ClassName.get(data.getEditedType()), "object")
-            .addStatement("this.object = object")
+            .addParameter(ClassName.get(Object.class), "object")
+            .addStatement("this.object = ($T) object", ClassName.get(data.getEditedType()))
             .build());
 
     MethodSpec.Builder initializeSubDelegatesBuilder =
@@ -493,9 +463,9 @@ public class DriverProcessor extends AbstractProcessor {
             .toString();
 
     String classNameToGenerate = packageName + "." + contextSimpleName;
-    // check, if context is already generatd ...
+    // check, if context is already generated ...
     if (this.generatedDelegates.contains(classNameToGenerate)) {
-      // alreday generated ... nothing to do
+      // already generated ... nothing to do
       return ClassName.get(packageName, contextSimpleName);
     }
     this.generatedDelegates.add(classNameToGenerate);
@@ -560,9 +530,6 @@ public class DriverProcessor extends AbstractProcessor {
             .addModifiers(Modifier.PUBLIC)
             .addAnnotation(Override.class)
             .returns(Class.class)
-            //            .returns(
-            //                ParameterizedTypeName.get(
-            //                    ClassName.get(Class.class), ClassName.get(data.getEditedType())))
             .addStatement("return $L.class", MoreTypes.asElement(data.getEditedType()))
             .build());
 
