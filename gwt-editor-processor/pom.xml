@@ -52,7 +52,7 @@
         <auto.common.version>0.10</auto.common.version>
         <auto.service.version>1.0-rc6</auto.service.version>
         <compile-testing.version>0.18</compile-testing.version>
-        <gwt.version>2.8.2</gwt.version>
+        <gwt.version>2.9.0</gwt.version>
         <javapoet.version>1.12.1</javapoet.version>
         <compile.testing.version>0.18</compile.testing.version>
         <junit.version>4.13</junit.version>
