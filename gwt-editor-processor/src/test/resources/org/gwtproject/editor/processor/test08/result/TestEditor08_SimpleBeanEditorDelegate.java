@@ -7,40 +7,29 @@ import org.gwtproject.editor.client.impl.SimpleBeanEditorDelegate;
 import org.gwtproject.editor.client.testing.FakeLeafValueEditorWithHasEditorDelegate_Long_SimpleBeanEditorDelegate;
 import org.gwtproject.editor.client.testing.FakeLeafValueEditorWithHasEditorDelegate_String_SimpleBeanEditorDelegate;
 import org.gwtproject.editor.processor.common.Model01Dto;
-
-public class TestEditor08_SimpleBeanEditorDelegate extends SimpleBeanEditorDelegate<Model01Dto, TestEditor08> {
+public class TestEditor08_SimpleBeanEditorDelegate extends SimpleBeanEditorDelegate {
   private TestEditor08 editor;
-
   private Model01Dto object;
-
-  private SimpleBeanEditorDelegate<Long, FakeLeafValueEditorWithHasEditorDelegate<Long>> idDelegate;
-
-  private SimpleBeanEditorDelegate<String, FakeLeafValueEditorWithHasEditorDelegate<String>> nameDelegate;
-
-  private SimpleBeanEditorDelegate<String, FakeLeafValueEditorWithHasEditorDelegate<String>> phoneDelegate;
-
-  private SimpleBeanEditorDelegate<String, FakeLeafValueEditorWithHasEditorDelegate<String>> emailDelegate;
-
+  private SimpleBeanEditorDelegate idDelegate;
+  private SimpleBeanEditorDelegate nameDelegate;
+  private SimpleBeanEditorDelegate phoneDelegate;
+  private SimpleBeanEditorDelegate emailDelegate;
   @Override
   protected TestEditor08 getEditor() {
     return editor;
   }
-
   @Override
   protected void setEditor(Editor editor) {
     this.editor = (TestEditor08) editor;
   }
-
   @Override
   public Model01Dto getObject() {
     return object;
   }
-
   @Override
-  protected void setObject(Model01Dto object) {
-    this.object = object;
+  protected void setObject(Object object) {
+    this.object = (Model01Dto) object;
   }
-
   @Override
   protected void initializeSubDelegates() {
     if (editor.id != null) {
@@ -60,7 +49,6 @@ public class TestEditor08_SimpleBeanEditorDelegate extends SimpleBeanEditorDeleg
       addSubDelegate(emailDelegate, appendPath("email"), editor.email);
     }
   }
-
   @Override
   public void accept(EditorVisitor visitor) {
     if (idDelegate != null) {
