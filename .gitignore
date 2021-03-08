@@ -6,6 +6,11 @@
 .flattened-pom.xml
 */dependency-reduced-pom.xml
 
+# eclipse stuff
+.classpath
+.project
+.settings
+
 # gwt caches and compiled units #
 war/gwt_bree/
 gwt-unitCache/
