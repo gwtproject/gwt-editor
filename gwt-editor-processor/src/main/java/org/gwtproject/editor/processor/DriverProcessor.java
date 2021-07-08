@@ -147,6 +147,14 @@ public class DriverProcessor extends AbstractProcessor {
     String pkgName = this.elements.getPackageOf(interfaceToImplement).getQualifiedName().toString();
     String typeName = createNameFromEnclosedTypes(interfaceToImplement, "_Impl");
 
+    String classNameToGenerate = pkgName + "." + typeName;
+    // check, if typename is already generated ...
+    if (this.generatedDelegates.contains(classNameToGenerate)) {
+      // alreday generated ... nothing to do
+      return;
+    }
+    this.generatedDelegates.add(classNameToGenerate);
+
     // impl accept(visitor) method
     ParameterizedTypeName rootEdContextType =
         ParameterizedTypeName.get(
@@ -216,8 +224,8 @@ public class DriverProcessor extends AbstractProcessor {
       driverFile.writeTo(this.filer);
     } catch (IOException e) {
       this.createMessage(
-          Diagnostic.Kind.WARNING,
-          "Exception: type >>"
+          Diagnostic.Kind.NOTE,
+          "type >>"
               + rootEditorModel.getEditorType().toString()
               + " << - trying to write: >>"
               + driverFile.packageName
@@ -250,13 +258,13 @@ public class DriverProcessor extends AbstractProcessor {
             .getQualifiedName()
             .toString();
 
-    String delegateClassName = packageName + "." + delegateSimpleName;
-    // check, if delegate is already generatd ...
-    if (this.generatedDelegates.contains(delegateClassName)) {
+    String classNameToGenerate = packageName + "." + delegateSimpleName;
+    // check, if delegate is already generated ...
+    if (this.generatedDelegates.contains(classNameToGenerate)) {
       // alreday generated ... nothing to do
       return ClassName.get(packageName, delegateSimpleName);
     }
-    this.generatedDelegates.add(delegateClassName);
+    this.generatedDelegates.add(classNameToGenerate);
 
     TypeName rawEditorType = ClassName.get(types.erasure(data.getEditorType()));
 
@@ -403,8 +411,8 @@ public class DriverProcessor extends AbstractProcessor {
       delegateFile.writeTo(filer);
     } catch (IOException e) {
       this.createMessage(
-          Diagnostic.Kind.WARNING,
-          "Exception: type >>"
+          Diagnostic.Kind.NOTE,
+          "type >>"
               + editorModel.getEditorType().toString()
               + " << - trying to write: >>"
               + delegateFile.packageName
@@ -453,6 +461,14 @@ public class DriverProcessor extends AbstractProcessor {
             .getPackageOf(types.asElement(parent.getEditorType()))
             .getQualifiedName()
             .toString();
+
+    String classNameToGenerate = packageName + "." + contextSimpleName;
+    // check, if context is already generated ...
+    if (this.generatedDelegates.contains(classNameToGenerate)) {
+      // already generated ... nothing to do
+      return ClassName.get(packageName, contextSimpleName);
+    }
+    this.generatedDelegates.add(classNameToGenerate);
 
     //    try {
     TypeSpec.Builder contextTypeBuilder =
@@ -548,8 +564,8 @@ public class DriverProcessor extends AbstractProcessor {
       contextFile.writeTo(filer);
     } catch (IOException e) {
       this.createMessage(
-          Diagnostic.Kind.WARNING,
-          "Exception: type >>"
+          Diagnostic.Kind.NOTE,
+          "type >>"
               + parent.getEditorType().toString()
               + " << - trying to write: >>"
               + contextFile.packageName

@@ -295,7 +295,8 @@ public class SimpleBeanEditorTest extends GWTTestCase {
     }
   }
 
-  class ValueAwareAddressEditor extends AddressEditor implements ValueAwareEditor<Address> {
+  public static class ValueAwareAddressEditor extends AddressEditor
+      implements ValueAwareEditor<Address> {
     int flushCalled;
     int setDelegateCalled;
     int setValueCalled;

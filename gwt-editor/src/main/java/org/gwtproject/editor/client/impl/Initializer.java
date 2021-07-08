@@ -24,6 +24,7 @@ import org.gwtproject.editor.client.HasEditorDelegate;
  * Extends the logic in Refresher to provide the editor instance with references to framework
  * plumbing fixes.
  */
+@SuppressWarnings("rawtypes")
 public class Initializer extends Refresher {
 
   @Override

@@ -1,5 +1,4 @@
 package org.gwtproject.editor.processor.test07;
-
 import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
@@ -9,34 +8,35 @@ import org.gwtproject.editor.client.impl.SimpleBeanEditorDelegate;
 import org.gwtproject.editor.processor.common.Model01Generic02Dto;
 
 public class TestEditor07_SimpleBeanEditorDelegate extends SimpleBeanEditorDelegate {
+
   private TestEditor07 editor;
   private Model01Generic02Dto<String> object;
-  
-  @Override()
+
+  @Override
   protected TestEditor07 getEditor() {
     return editor;
   }
-  
-  @Override()
+
+  @Override
   protected void setEditor(Editor editor) {
-    this.editor = (TestEditor07)editor;
+    this.editor = (TestEditor07) editor;
   }
-  
-  @Override()
+
+  @Override
   public Model01Generic02Dto<String> getObject() {
     return object;
   }
-  
-  @Override()
+
+  @Override
   protected void setObject(Object object) {
-    this.object = (Model01Generic02Dto<String>)object;
+    this.object = (Model01Generic02Dto<String>) object;
   }
-  
-  @Override()
+
+  @Override
   protected void initializeSubDelegates() {
   }
-  
-  @Override()
+
+  @Override
   public void accept(EditorVisitor visitor) {
     {
       TestEditor07_id_Context ctx = new TestEditor07_id_Context(getObject(), editor.id, appendPath("id"));

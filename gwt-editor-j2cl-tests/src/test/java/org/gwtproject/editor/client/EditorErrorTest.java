@@ -63,7 +63,7 @@ public class EditorErrorTest {
     }
   }
 
-  class PersonEditorReceivesErrors extends PersonEditor implements HasEditorErrors<Person> {
+  public class PersonEditorReceivesErrors extends PersonEditor implements HasEditorErrors<Person> {
     List<EditorError> errors;
 
     @Override
