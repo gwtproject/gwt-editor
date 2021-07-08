@@ -120,7 +120,7 @@ public class DriverProcessor extends AbstractProcessor {
     return true;
   }
 
-  private void createMessage(Diagnostic.Kind kind, String message) {
+  protected void createMessage(Diagnostic.Kind kind, String message) {
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter(sw);
     pw.println(message);
@@ -142,7 +142,7 @@ public class DriverProcessor extends AbstractProcessor {
     return ClassName.get(SimpleBeanEditorDelegate.class);
   }
 
-  private void generate(TypeElement interfaceToImplement, EditorModel rootEditorModel) {
+  protected void generate(TypeElement interfaceToImplement, EditorModel rootEditorModel) {
     // start driver
     String pkgName = this.elements.getPackageOf(interfaceToImplement).getQualifiedName().toString();
     String typeName = createNameFromEnclosedTypes(interfaceToImplement, "_Impl");
@@ -233,13 +233,13 @@ public class DriverProcessor extends AbstractProcessor {
    * Joins the name of the type with any enclosing types, with "_" as the delimeter, and appends an
    * optional suffix.
    */
-  private String createNameFromEnclosedTypes(TypeElement interfaceToImplement, String suffix) {
+  protected String createNameFromEnclosedTypes(TypeElement interfaceToImplement, String suffix) {
     StringJoiner joiner = new StringJoiner("_", "", suffix == null ? "" : suffix);
     ClassName.get(interfaceToImplement).simpleNames().forEach(joiner::add);
     return joiner.toString();
   }
 
-  private ClassName getEditorDelegate(EditorModel editorModel, EditorProperty data) {
+  protected ClassName getEditorDelegate(EditorModel editorModel, EditorProperty data) {
     String delegateSimpleName =
         escapedMaybeParameterizedBinaryName(data.getEditorType())
             + "_"
