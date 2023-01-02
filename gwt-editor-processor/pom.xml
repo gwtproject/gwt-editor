@@ -4,16 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.gwtproject.editor</groupId>
-        <artifactId>gwt-editor-parent</artifactId>
-        <version>dev</version>
+        <groupId>walkingkooka</groupId>
+        <artifactId>j2cl-gwt-editor-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>gwt-editor-processor</artifactId>
-    <version>${revision}</version>
+    <artifactId>j2cl-gwt-editor-processor</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>GWT Editor Processor</name>
-    <url>https://github.com/gwtproject/gwt-editor</url>
+    <url>https://github.com/mP1/j2cl-gwt-editor</url>
 
     <organization>
         <name>The GWT Project Authors</name>
@@ -36,9 +36,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/gwtproject/gwt-editor.git</connection>
-        <developerConnection>scm:git:ssh://github.com/gwtproject/gwt-editor.git</developerConnection>
-        <url>https://github.com/gwtproject/gwt-editor/tree/master</url>
+        <connection>scm:git:git://github.com/mP1/j2cl-gwt-editor.git</connection>
+        <developerConnection>scm:git:ssh://github.com/mP1/j2cl-gwt-editor.git</developerConnection>
+        <url>https://github.com/mP1/j2cl-gwt-editor/tree/master</url>
     </scm>
 
     <inceptionYear>2018</inceptionYear>
@@ -64,15 +64,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.gwtproject.editor</groupId>
-            <artifactId>gwt-editor</artifactId>
-            <version>${project.version}</version>
+            <groupId>walkingkooka</groupId>
+            <artifactId>j2cl-gwt-editor</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.0.0.GA</version>
+            <groupId>walkingkooka</groupId>
+            <artifactId>j2cl-javax-validation</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.squareup</groupId>
@@ -210,11 +210,11 @@
                         <configuration>
                             <artifactSet>
                                 <excludes>
-                                    <exclude>org.gwtproject.editor:gwt-editor</exclude>
+                                    <exclude>walkingkooka:j2cl-gwt-editor</exclude>
                                     <exclude>org.gwtproject.event:gwt-event</exclude>
                                     <exclude>com.google.auto.service:*</exclude>
                                     <exclude>javax.annotation:javax.annotation-api</exclude>
-                                    <exclude>javax.validation:validation-api</exclude>
+                                    <exclude>walkingkooka:j2cl-javax.validation</exclude>
                                     <exclude>com.google.code.findbugs:jsr305</exclude>
                                     <exclude>com.google.j2objc:j2objc-annotations</exclude>
                                     <exclude>com.google.errorprone:error_prone_annotations</exclude>

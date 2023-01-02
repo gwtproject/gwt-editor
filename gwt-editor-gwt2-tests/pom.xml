@@ -4,13 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.gwtproject.editor</groupId>
-        <artifactId>gwt-editor-parent</artifactId>
-        <version>dev</version>
+        <groupId>walkingkooka</groupId>
+        <artifactId>j2cl-gwt-editor-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>gwt-editor-gwt2-tests</artifactId>
-    <version>${revision}</version>
-    <packaging>gwt-lib</packaging>
+    <artifactId>j2cl-gwt-editor-gwt2-tests</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <name>GWT Editor GWT 2 Tests</name>
     <description>Test cases for the GWT 2 tests</description>
@@ -37,15 +36,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.gwtproject.editor</groupId>
-            <artifactId>gwt-editor</artifactId>
-            <version>${revision}</version>
+            <groupId>walkingkooka</groupId>
+            <artifactId>j2cl-gwt-editor</artifactId>
+            <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.gwtproject.editor</groupId>
-            <artifactId>gwt-editor-processor</artifactId>
-            <version>${revision}</version>
+            <groupId>walkingkooka</groupId>
+            <artifactId>j2cl-gwt-editor-processor</artifactId>
+            <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
 
