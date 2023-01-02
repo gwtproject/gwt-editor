@@ -90,7 +90,7 @@
               <tests>
                 <param>org.gwtproject.editor.client.DirtyEditorTest</param>
                 <!--
-[ERROR] Failed to execute goal walkingkooka:j2cl-maven-plugin:1.0-SNAPSHOT:test (walkingkooka-spreadsheet-it-junit-test) on project j2cl-gwt-editor-j2cl-tests: Failed to build project, check logs above: java.nio.file.NoSuchFileException: /Users/miroslav/repos-github/j2cl-gwt-editor/gwt-editor-j2cl-tests/target/walkingkooka-j2cl-maven-plugin-cache/walkingkooka--j2cl-gwt-editor-j2cl-tests--jar--1.0-SNAPSHOT-1d370bd0166dfa4c514a3288284dc0c8c464f4af/1-javac-compile/output/org/gwtproject/editor/client/EditorErrorTest.testsuite -> [Help 1]
+[ERROR] Failed to execute goal walkingkooka:j2cl-maven-plugin:1.0-SNAPSHOT:test (walkingkooka-spreadsheet-it-junit-test) on project j2cl-gwt-editor-j2cl-tests: Failed to build project, check logs above: java.nio.file.NoSuchFileException: /Users/miroslav/repos-github/j2cl-gwt-editor/gwt-editor-j2cl-tests/target/walkingkooka-j2cl-maven-plugin-cache/walkingkooka-\-j2cl-gwt-editor-j2cl-tests-\-jar-\-1.0-SNAPSHOT-1d370bd0166dfa4c514a3288284dc0c8c464f4af/1-javac-compile/output/org/gwtproject/editor/client/EditorErrorTest.testsuite -> [Help 1]
 org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal walkingkooka:j2cl-maven-plugin:1.0-SNAPSHOT:test (walkingkooka-spreadsheet-it-junit-test) on project j2cl-gwt-editor-j2cl-tests: Failed to build project, check logs above
                 <param>org.gwtproject.editor.client.EditorErrorTest</param>
                 -->
