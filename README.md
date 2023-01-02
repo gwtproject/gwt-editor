@@ -1,6 +1,6 @@
 # GWT Editor
 
-![GWT3/J2CL compatible](https://img.shields.io/badge/GWT3/J2CL-compatible-brightgreen.svg)  [![License](https://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html) [![Chat on Gitter](https://badges.gitter.im/hal/elemento.svg)](https://gitter.im/gwtproject/gwt-modules) ![CI](https://github.com/gwtproject/gwt-editor/workflows/CI/badge.svg)
+![GWT3/J2CL compatible](https://img.shields.io/badge/GWT3/J2CL-compatible-brightgreen.svg)  [![License](https://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html) [![Chat on Gitter](https://badges.gitter.im/hal/elemento.svg)](https://gitter.im/gwtproject/gwt-modules) ![CI](https://github.com/mP1/j2cl-gwt-editor/workflows/CI/badge.svg)
 
 A future-proof port of the `com.google.gwt.editor.Editor` GWT module, with no dependency on `gwt-user` (besides the Java Runtime Emulation), to prepare for GWT 3 / J2Cl.
 
@@ -13,7 +13,7 @@ A future-proof port of the `com.google.gwt.editor.Editor` GWT module, with no de
    ```xml
    <dependency>
      <groupId>org.gwtproject.editor</groupId>
-     <artifactId>gwt-editor</artifactId>
+     <artifactId>j2cl-gwt-editor</artifactId>
      <version>HEAD-SNAPSHOT</version>
    </dependency>
    ```
@@ -23,7 +23,7 @@ A future-proof port of the `com.google.gwt.editor.Editor` GWT module, with no de
     ```xml
     <dependency>
       <groupId>org.gwtproject.editor</groupId>
-      <artifactId>gwt-editor-processor</artifactId>
+      <artifactId>j2cl-gwt-editor-processor</artifactId>
       <version>HEAD-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
@@ -32,7 +32,7 @@ A future-proof port of the `com.google.gwt.editor.Editor` GWT module, with no de
    For Gradle:
 
    ```gradle
-   implementation("org.gwtproject.editor:gwt-editor:HEAD-SNAPSHOT")
+   implementation("org.gwtproject.editor:j2cl-gwt-editor:HEAD-SNAPSHOT")
    ```
 
     and the processor:
@@ -41,7 +41,7 @@ A future-proof port of the `com.google.gwt.editor.Editor` GWT module, with no de
    ToDo ... 
     <dependency>
       <groupId>org.gwtproject.editor</groupId>
-      <artifactId>gwt-editor-processor</artifactId>
+      <artifactId>j2cl-gwt-editor-processor</artifactId>
       <version>HEAD-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>

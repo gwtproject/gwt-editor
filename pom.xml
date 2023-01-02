@@ -3,16 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.gwtproject.editor</groupId>
-    <artifactId>gwt-editor-parent</artifactId>
-
-    <version>dev</version>
+    <groupId>walkingkooka</groupId>
+    <artifactId>j2cl-gwt-editor-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
     <name>GWT Editor Parent</name>
     <description>Parent POM containing the gwt-event module, gwt-event-processor module and the test modules (gwt2-tests and j2cl-tests)</description>
-    <url>https://github.com/gwtproject/gwt-editor</url>
+    <url>https://github.com/mP1/j2cl-gwt-editor</url>
 
     <organization>
         <name>The GWT Project Authors</name>
@@ -35,9 +34,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/gwtproject/gwt-editors.git</connection>
-        <developerConnection>scm:git:ssh://github.com/gwtproject/gwt-editors.git</developerConnection>
-        <url>https://github.com/gwtproject/gwt-editors/tree/master</url>
+        <connection>scm:git:git://github.com/mP1/j2cl-gwt-editors.git</connection>
+        <developerConnection>scm:git:ssh://github.com/mP1/j2cl-gwt-editors.git</developerConnection>
+        <url>https://github.com/mP1/j2cl-gwt-editors/tree/master</url>
     </scm>
 
     <inceptionYear>2018</inceptionYear>
@@ -45,7 +44,6 @@
     <modules>
         <module>gwt-editor</module>
         <module>gwt-editor-processor</module>
-        <module>gwt-editor-gwt2-tests</module>
         <module>gwt-editor-j2cl-tests</module>
     </modules>
 
@@ -172,26 +170,22 @@
         <dependencies>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>gwt-editor</artifactId>
-                <version>${revision}</version>
+                <artifactId>j2cl-gwt-editor</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>gwt-editor-processor</artifactId>
-                <version>${revision}</version>
+                <artifactId>j2cl-gwt-editor-processor</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>github-mp1-appengine-repo</id>
+            <name>github.com/mP1 repository</name>
+            <url>https://maven-repo-254709.appspot.com</url>
         </repository>
     </distributionManagement>
 </project>

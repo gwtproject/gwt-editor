@@ -6,17 +6,16 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.gwtproject.editor</groupId>
-    <artifactId>gwt-editor-parent</artifactId>
-    <version>dev</version>
+    <groupId>walkingkooka</groupId>
+    <artifactId>j2cl-gwt-editor-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>gwt-editor</artifactId>
-  <version>${revision}</version>
-  <packaging>gwt-lib</packaging>
+  <artifactId>j2cl-gwt-editor</artifactId>
+  <version>1.0-SNAPSHOT</version>
 
   <name>GWT Editor</name>
   <description>A j2cl ready implementation of the GWT Editor Module ready to use with GWT 2 and J2CL / GWT 3.</description>
-  <url>https://github.com/gwtproject/gwt-editor</url>
+  <url>https://github.com/mP1/j2cl-gwt-editor</url>
 
   <organization>
     <name>The GWT Project Authors</name>
@@ -39,9 +38,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/gwtproject/gwt-editor.git</connection>
-    <developerConnection>scm:git:ssh://github.com/gwtproject/gwt-editor.git</developerConnection>
-    <url>https://github.com/gwtproject/gwt-editor/tree/master</url>
+    <connection>scm:git:git://github.com/mP1/j2cl-gwt-editor.git</connection>
+    <developerConnection>scm:git:ssh://github.com/mP1/j2cl-gwt-editor.git</developerConnection>
+    <url>https://github.com/mP1/j2cl-gwt-editor/tree/master</url>
   </scm>
 
   <inceptionYear>2018</inceptionYear>
@@ -58,17 +57,10 @@
       <artifactId>gwt-event</artifactId>
       <version>${gwt-event.version}</version>
     </dependency>
-
     <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-      <version>1.0.0.GA</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-      <version>1.0.0.GA</version>
-      <classifier>sources</classifier>
+      <groupId>walkingkooka</groupId>
+      <artifactId>j2cl-javax-validation</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
@@ -144,4 +136,12 @@
       </build>
     </profile>
   </profiles>
+
+  <distributionManagement>
+    <repository>
+      <id>github-mp1-appengine-repo</id>
+      <name>github.com/mP1 repository</name>
+      <url>https://maven-repo-254709.appspot.com</url>
+    </repository>
+  </distributionManagement>
 </project>
