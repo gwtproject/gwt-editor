@@ -129,7 +129,7 @@ public class Person {
 > this component uses domino-ui
 
 ```java
-//Note place in *-client directory
+////Note place in client project or package area
 public class PersonComponent implements IsElement<HTMLDivElement>, Editor<Person> {
 
     @IsDriver
