@@ -1,34 +1,35 @@
 package org.gwtproject.editor.processor.test08;
-import java.lang.Object;
+import java.lang.Long;
 import java.lang.Override;
-import org.gwtproject.editor.client.Editor;
+import java.lang.String;
 import org.gwtproject.editor.client.EditorVisitor;
 import org.gwtproject.editor.client.impl.SimpleBeanEditorDelegate;
+import org.gwtproject.editor.client.testing.FakeLeafValueEditorWithHasEditorDelegate;
 import org.gwtproject.editor.client.testing.FakeLeafValueEditorWithHasEditorDelegate_Long_SimpleBeanEditorDelegate;
 import org.gwtproject.editor.client.testing.FakeLeafValueEditorWithHasEditorDelegate_String_SimpleBeanEditorDelegate;
 import org.gwtproject.editor.processor.common.Model01Dto;
-public class TestEditor08_SimpleBeanEditorDelegate extends SimpleBeanEditorDelegate {
+public class TestEditor08_SimpleBeanEditorDelegate extends SimpleBeanEditorDelegate<Model01Dto, TestEditor08> {
   private TestEditor08 editor;
   private Model01Dto object;
-  private SimpleBeanEditorDelegate idDelegate;
-  private SimpleBeanEditorDelegate nameDelegate;
-  private SimpleBeanEditorDelegate phoneDelegate;
-  private SimpleBeanEditorDelegate emailDelegate;
+  private SimpleBeanEditorDelegate<Long, FakeLeafValueEditorWithHasEditorDelegate<Long>> idDelegate;
+  private SimpleBeanEditorDelegate<String, FakeLeafValueEditorWithHasEditorDelegate<String>> nameDelegate;
+  private SimpleBeanEditorDelegate<String, FakeLeafValueEditorWithHasEditorDelegate<String>> phoneDelegate;
+  private SimpleBeanEditorDelegate<String, FakeLeafValueEditorWithHasEditorDelegate<String>> emailDelegate;
   @Override
   protected TestEditor08 getEditor() {
     return editor;
   }
   @Override
-  protected void setEditor(Editor editor) {
-    this.editor = (TestEditor08) editor;
+  protected void setEditor(TestEditor08 editor) {
+    this.editor = editor;
   }
   @Override
   public Model01Dto getObject() {
     return object;
   }
   @Override
-  protected void setObject(Object object) {
-    this.object = (Model01Dto) object;
+  protected void setObject(Model01Dto object) {
+    this.object = object;
   }
   @Override
   protected void initializeSubDelegates() {
@@ -72,4 +73,3 @@ public class TestEditor08_SimpleBeanEditorDelegate extends SimpleBeanEditorDeleg
       ctx.traverse(visitor, emailDelegate);
     }
   }
-}

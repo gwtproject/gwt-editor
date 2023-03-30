@@ -28,8 +28,9 @@ import org.gwtproject.editor.client.annotation.IsDriver;
  * AbstractEditorDriverGenerator.
  */
 public class SimpleBeanEditorTest extends TestCase {
-  class AddressCoEditorView extends LeafAddressEditor implements IsEditor<LeafAddressEditor> {
-    private LeafAddressEditor addressEditor = new LeafAddressEditor();
+  static class AddressCoEditorView extends LeafAddressEditor
+      implements IsEditor<LeafAddressEditor> {
+    private final LeafAddressEditor addressEditor = new LeafAddressEditor();
 
     @Override
     public LeafAddressEditor asEditor() {
@@ -131,7 +132,7 @@ public class SimpleBeanEditorTest extends TestCase {
   interface PersonEditorWithAddressEditorViewDriver
       extends SimpleBeanEditorDriver<Person, PersonEditorWithAddressEditorView> {}
 
-  class SampleView implements Editor<Sample> {
+  static class SampleView implements Editor<Sample> {
     SimpleEditor<Integer> id = SimpleEditor.of(0);
   }
 
@@ -151,7 +152,7 @@ public class SimpleBeanEditorTest extends TestCase {
   interface PersonEditorWithAliasedSubEditorsDriver
       extends SimpleBeanEditorDriver<Person, PersonEditorWithAliasedSubEditors> {}
 
-  class PersonEditorWithCoAddressEditorView implements Editor<Person> {
+  static class PersonEditorWithCoAddressEditorView implements Editor<Person> {
     AddressCoEditorView addressEditor = new AddressCoEditorView();
     SimpleEditor<String> name = SimpleEditor.of(UNINITIALIZED);
   }
@@ -221,7 +222,7 @@ public class SimpleBeanEditorTest extends TestCase {
     }
   }
 
-  class PersonEditorWithValueAwareAddressEditor implements Editor<Person> {
+  static class PersonEditorWithValueAwareAddressEditor implements Editor<Person> {
     ValueAwareAddressEditor addressEditor = new ValueAwareAddressEditor();
     SimpleEditor<String> name = SimpleEditor.of(UNINITIALIZED);
 
@@ -233,7 +234,7 @@ public class SimpleBeanEditorTest extends TestCase {
   interface PersonEditorWithValueAwareAddressEditorDriver
       extends SimpleBeanEditorDriver<Person, PersonEditorWithValueAwareAddressEditor> {}
 
-  class PersonEditorWithValueAwareLeafAddressEditor implements Editor<Person> {
+  static class PersonEditorWithValueAwareLeafAddressEditor implements Editor<Person> {
     ValueAwareLeafAddressEditor addressEditor = new ValueAwareLeafAddressEditor();
     SimpleEditor<String> name = SimpleEditor.of(UNINITIALIZED);
 
@@ -249,7 +250,7 @@ public class SimpleBeanEditorTest extends TestCase {
     SimpleEditor<String> name = SimpleEditor.of(UNINITIALIZED);
   }
 
-  class PersonWithList {
+  static class PersonWithList {
     String name = "PersonWithList";
     List<Address> addresses = new ArrayList<Address>();
 
@@ -262,7 +263,7 @@ public class SimpleBeanEditorTest extends TestCase {
     }
   }
 
-  class PersonWithListEditor implements Editor<PersonWithList> {
+  static class PersonWithListEditor implements Editor<PersonWithList> {
     SimpleEditor<String> nameEditor = SimpleEditor.of(UNINITIALIZED);
     ListEditor<Address, ValueAwareAddressEditor> addressesEditor =
         ListEditor.of(
@@ -320,7 +321,8 @@ public class SimpleBeanEditorTest extends TestCase {
   }
 
   /** All the mix-ins. Not that this seems like a good idea... */
-  class ValueAwareLeafAddressEditor extends LeafAddressEditor implements ValueAwareEditor<Address> {
+  static class ValueAwareLeafAddressEditor extends LeafAddressEditor
+      implements ValueAwareEditor<Address> {
     int flushCalled;
     int setDelegateCalled;
 
@@ -338,7 +340,7 @@ public class SimpleBeanEditorTest extends TestCase {
     }
   }
 
-  class TaggedItemAddressEditor implements Editor<TaggedItem<Address>> {
+  static class TaggedItemAddressEditor implements Editor<TaggedItem<Address>> {
     @Path("item.city")
     SimpleEditor<String> itemCityEditor = SimpleEditor.of(UNINITIALIZED);
 
@@ -575,8 +577,9 @@ public class SimpleBeanEditorTest extends TestCase {
   public void testListEditor() {
     final SortedMap<Integer, SimpleEditor<String>> positionMap =
         new TreeMap<Integer, SimpleEditor<String>>();
-    @SuppressWarnings("unchecked")
-    final SimpleEditor<String>[] disposed = new SimpleEditor[1];
+    //    final SimpleEditor<String>[] disposed = new SimpleEditor[1];
+    final List<SimpleEditor<String>> disposed = new ArrayList<>();
+    disposed.add(null);
     class StringSource extends EditorSource<SimpleEditor<String>> {
       @Override
       public SimpleEditor<String> create(int index) {
@@ -587,7 +590,7 @@ public class SimpleBeanEditorTest extends TestCase {
 
       @Override
       public void dispose(SimpleEditor<String> editor) {
-        disposed[0] = editor;
+        disposed.set(0, editor);
         positionMap.values().remove(editor);
       }
 
@@ -636,7 +639,7 @@ public class SimpleBeanEditorTest extends TestCase {
     // Delete an element
     SimpleEditor<String> expectedDisposed = editors.get(0);
     mutableList.remove(0);
-    assertSame(expectedDisposed, disposed[0]);
+    assertSame(expectedDisposed, disposed.get(0));
     assertEquals(3, editors.size());
     assertEquals("quux", editors.get(2).getValue());
     assertEquals(editors, new ArrayList<>(positionMap.values()));
@@ -654,9 +657,8 @@ public class SimpleBeanEditorTest extends TestCase {
     assertEquals(editors, new ArrayList<>(positionMap.values()));
 
     // Edit again: should reuse sub-editors and dispose unneeded ones
-    disposed[0] = null;
+    disposed.set(0, null);
     expectedDisposed = editors.get(2);
-    @SuppressWarnings("unchecked")
     List<SimpleEditor<String>> expectedEditors = Arrays.asList(editors.get(0), editors.get(1));
     driver.edit(rawData);
     assertEquals(expectedEditors, editors);
@@ -665,7 +667,7 @@ public class SimpleBeanEditorTest extends TestCase {
     assertEquals(rawData.size(), editors.size());
     assertEquals(rawData, Arrays.asList(editors.get(0).getValue(), editors.get(1).getValue()));
     assertEquals(editors, new ArrayList<SimpleEditor<String>>(positionMap.values()));
-    assertEquals(expectedDisposed, disposed[0]);
+    assertEquals(expectedDisposed, disposed.get(0));
   }
 
   /** Ensure that a ListEditor deeper in the chain is properly flushed. */

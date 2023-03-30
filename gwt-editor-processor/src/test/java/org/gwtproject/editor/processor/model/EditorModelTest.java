@@ -23,7 +23,6 @@ import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import java.util.Arrays;
 import java.util.List;
-import javax.lang.model.element.Element;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
@@ -360,10 +359,10 @@ public class EditorModelTest {
     checkPersonReadonly(fields.get(1));
   }
 
-  /**
-   * Tests the case where an Editor wants to editor a property that is not provided by its
-   * associated Proxy type.
-   */
+  //  /**
+  //   * Tests the case where an Editor wants to editor a property that is not provided by its
+  //   * associated Proxy type.
+  //   */
   //  public void testMissingGetter() {
   //    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
   //    builder.setLowestLogLevel(TreeLogger.ERROR);
@@ -384,7 +383,7 @@ public class EditorModelTest {
   //    testLogger.assertCorrectLogEntries();
   //  }
 
-  /** Tests the sanity-check error messages emitted by the constructor. */
+  //  /** Tests the sanity-check error messages emitted by the constructor. */
   //  public void testSanityErrorMessages() {
   //    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
   //    builder.setLowestLogLevel(TreeLogger.ERROR);
@@ -498,7 +497,7 @@ public class EditorModelTest {
     Assert.assertEquals("setName", editorField.getSetterName());
   }
 
-  /** @param editorField */
+  /** @param editorField editor property */
   private void checkPersonReadonly(EditorProperty editorField) {
     assertNotNull(editorField);
     assertEquals(typeMirrorFor(SimpleEditor.class), raw(editorField.getEditorType()));
@@ -515,9 +514,9 @@ public class EditorModelTest {
         MoreTypes.equivalence().equivalent(expected, actual));
   }
 
-  private Element typeElementFor(Class<?> clazz) {
-    return MoreTypes.asElement(raw(elements.getTypeElement(clazz.getCanonicalName()).asType()));
-  }
+  //  private Element typeElementFor(Class<?> clazz) {
+  //    return MoreTypes.asElement(raw(elements.getTypeElement(clazz.getCanonicalName()).asType()));
+  //  }
 
   private TypeMirror typeMirrorFor(Class<?> clazz) {
     return raw(elements.getTypeElement(clazz.getCanonicalName()).asType());
@@ -683,7 +682,7 @@ public class EditorModelTest {
     SimpleEditor<Long> lastModified;
     public SimpleEditor<String> name;
     SimpleEditor<String> readonly;
-    public static SimpleEditor ignoredStatic;
+    public static SimpleEditor<String> ignoredStatic;
     private SimpleEditor<String> ignoredPrivate;
     @Editor.Ignore public SimpleEditor<String> ignoredPublic;
   }
@@ -740,7 +739,7 @@ public class EditorModelTest {
     interface AProxy extends EntityProxy {}
 
     interface AEditor extends Editor<AProxy> {
-      SimpleEditor needsParameterization();
+      SimpleEditor<AProxy> needsParameterization();
     }
   }
 
