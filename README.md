@@ -11,22 +11,21 @@ A future-proof port of the `com.google.gwt.editor.Editor` GWT module, with no de
    For Maven:
 
    ```xml
-   <dependency>
-     <groupId>org.gwtproject.editor</groupId>
-     <artifactId>gwt-editor</artifactId>
-     <version>HEAD-SNAPSHOT</version>
-   </dependency>
+      <dependency>
+          <groupId>org.gwtproject.editor</groupId>
+          <artifactId>gwt-editor</artifactId>
+          <version>1.0.0-RC1</version>
+      </dependency>
    ```
 
     and the processor:
-
     ```xml
-    <dependency>
-      <groupId>org.gwtproject.editor</groupId>
-      <artifactId>gwt-editor-processor</artifactId>
-      <version>HEAD-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
+      <dependency>
+          <groupId>org.gwtproject.editor</groupId>
+          <artifactId>gwt-editor-processor</artifactId>
+          <version>1.0.0-RC1</version>
+          <scope>provided</scope>
+      </dependency>
     ```
 
    For Gradle:
@@ -83,6 +82,7 @@ GWT Editor depends on the following module:
 
 ### the bean
 ```java
+//Note place in shared project or package area
 public class Person {
 
     private int id;
@@ -129,6 +129,7 @@ public class Person {
 > this component uses domino-ui
 
 ```java
+//Note place in client project or package area
 public class PersonComponent implements IsElement<HTMLDivElement>, Editor<Person> {
 
     @IsDriver
@@ -137,6 +138,7 @@ public class PersonComponent implements IsElement<HTMLDivElement>, Editor<Person
 
     private DominoElement<HTMLDivElement> root = DominoElement.of(div());
 
+    //Note Do not create getter/setters for these fields - it will cause a compile issue such as "java.lang.IllegalStateException: generation aborted! No getter exists for >>getId<< -> [Help 1]"
     IntegerBox id;
     TextBox name;
     CheckBox active;
@@ -171,8 +173,8 @@ public class PersonComponent implements IsElement<HTMLDivElement>, Editor<Person
     }
 
     @Override
-    public HTMLDivElement asElement() {
-        return root.asElement();
+    public HTMLDivElement element() {
+        return root.element();
     }
 }
 ```
