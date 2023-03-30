@@ -82,7 +82,7 @@ GWT Editor depends on the following module:
 
 ### the bean
 ```java
-//Note place in *-shared directory
+//Note place in shared project or package area
 public class Person {
 
     private int id;
