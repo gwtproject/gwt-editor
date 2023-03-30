@@ -129,7 +129,7 @@ public class Person {
 > this component uses domino-ui
 
 ```java
-////Note place in client project or package area
+//Note place in client project or package area
 public class PersonComponent implements IsElement<HTMLDivElement>, Editor<Person> {
 
     @IsDriver
@@ -138,7 +138,7 @@ public class PersonComponent implements IsElement<HTMLDivElement>, Editor<Person
 
     private DominoElement<HTMLDivElement> root = DominoElement.of(div());
 
-    //Note:  Do not create getter/setters for these fields - it will cause a compile issue such as "java.lang.IllegalStateException: generation aborted! No getter exists for >>getId<< -> [Help 1]"
+    //Note Do not create getter/setters for these fields - it will cause a compile issue such as "java.lang.IllegalStateException: generation aborted! No getter exists for >>getId<< -> [Help 1]"
     IntegerBox id;
     TextBox name;
     CheckBox active;
