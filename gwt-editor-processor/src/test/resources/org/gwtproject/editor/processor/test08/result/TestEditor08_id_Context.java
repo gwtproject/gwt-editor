@@ -5,6 +5,7 @@ import java.lang.Long;
 import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import org.gwtproject.editor.client.Editor;
 import org.gwtproject.editor.client.impl.AbstractEditorContext;
 import org.gwtproject.editor.processor.common.Model01Dto;
@@ -23,12 +24,14 @@ public class TestEditor08_id_Context extends AbstractEditorContext<Long> {
   }
   
   @Override
+  @SuppressWarnings("unchecked")
   public Long checkAssignment(Object value) {
     return (Long) value;
   }
   
   @Override
-  public Class getEditedType() {
+  @SuppressWarnings("unchecked")
+  public Class<Long> getEditedType() {
     return java.lang.Long.class;
   }
   

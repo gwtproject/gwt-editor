@@ -24,12 +24,10 @@ import org.gwtproject.editor.client.HasEditorDelegate;
  * Extends the logic in Refresher to provide the editor instance with references to framework
  * plumbing fixes.
  */
-@SuppressWarnings("rawtypes")
 public class Initializer extends Refresher {
 
   @Override
   public <Q> boolean visit(EditorContext<Q> ctx) {
-    @SuppressWarnings("unchecked")
     AbstractEditorDelegate<Q, ?> delegate = (AbstractEditorDelegate<Q, ?>) ctx.getEditorDelegate();
 
     // Pass in the EditorDelegate
@@ -42,7 +40,6 @@ public class Initializer extends Refresher {
     CompositeEditor<Q, ?, ?> asComposite = ctx.asCompositeEditor();
     if (asComposite != null) {
       // Various javac generics compilation problems here
-      @SuppressWarnings("rawtypes")
       EditorChain chain = delegate.getEditorChain();
       asComposite.setEditorChain(chain);
     }
