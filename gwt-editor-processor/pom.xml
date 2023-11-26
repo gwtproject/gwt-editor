@@ -46,17 +46,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
 
         <auto.common.version>1.1</auto.common.version>
         <auto.service.version>1.0</auto.service.version>
-        <compile-testing.version>0.18</compile-testing.version>
-        <gwt.version>2.9.0</gwt.version>
-        <javapoet.version>1.12.1</javapoet.version>
-        <compile.testing.version>0.18</compile.testing.version>
-        <junit.version>4.13.1</junit.version>
-        <org.truth.version>0.23</org.truth.version>
+        <gwt.version>2.10.0</gwt.version>
+        <javapoet.version>1.13.0</javapoet.version>
+        <compile.testing.version>0.21.0</compile.testing.version>
+        <junit.version>4.13.2</junit.version>
+        <org.truth.version>1.1.5</org.truth.version>
         <truth.version>1.0</truth.version>
 
         <maven.shade.plugin>3.2.4</maven.shade.plugin>
@@ -110,16 +109,11 @@
             <version>${compile.testing.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.truth0</groupId>
-            <artifactId>truth</artifactId>
-            <version>${org.truth.version}</version>
-            <scope>test</scope>
-        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.truth/truth -->
         <dependency>
             <groupId>com.google.truth</groupId>
             <artifactId>truth</artifactId>
-            <version>${truth.version}</version>
+            <version>${org.truth.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -135,10 +129,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <release>11</release>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                     <meminitial>128m</meminitial>
