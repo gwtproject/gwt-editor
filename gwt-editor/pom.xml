@@ -47,7 +47,7 @@
   <inceptionYear>2018</inceptionYear>
 
   <properties>
-    <maven.gwt.plugin>1.0.0</maven.gwt.plugin>
+    <maven.gwt.plugin>1.1.0</maven.gwt.plugin>
 
     <gwt-event.version>1.0.0-RC1</gwt-event.version>
   </properties>

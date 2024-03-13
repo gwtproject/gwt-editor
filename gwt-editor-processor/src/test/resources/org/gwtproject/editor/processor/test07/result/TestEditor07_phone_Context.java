@@ -4,6 +4,7 @@ import java.lang.Class;
 import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import org.gwtproject.editor.client.Editor;
 import org.gwtproject.editor.client.impl.AbstractEditorContext;
 import org.gwtproject.editor.processor.common.Model01Generic02Dto;
@@ -23,12 +24,14 @@ public class TestEditor07_phone_Context extends AbstractEditorContext<String> {
   }
   
   @Override
+  @SuppressWarnings("unchecked")
   public String checkAssignment(Object value) {
     return (String) value;
   }
   
   @Override
-  public Class getEditedType() {
+  @SuppressWarnings("unchecked")
+  public Class<String> getEditedType() {
     return java.lang.String.class;
   }
   
