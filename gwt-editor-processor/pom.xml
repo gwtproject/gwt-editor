@@ -46,18 +46,18 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
 
         <auto.common.version>1.1</auto.common.version>
         <auto.service.version>1.0</auto.service.version>
         <compile-testing.version>0.18</compile-testing.version>
-        <gwt.version>2.9.0</gwt.version>
-        <javapoet.version>1.12.1</javapoet.version>
+        <gwt.version>2.12.2</gwt.version>
+        <javapoet.version>1.13.0</javapoet.version>
         <compile.testing.version>0.18</compile.testing.version>
         <junit.version>4.13.1</junit.version>
         <org.truth.version>0.23</org.truth.version>
-        <truth.version>1.0</truth.version>
+        <truth.version>1.4.4</truth.version>
 
         <maven.shade.plugin>3.2.4</maven.shade.plugin>
     </properties>
@@ -93,13 +93,13 @@
 
         <!-- only for testing -->
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-user</artifactId>
             <version>${gwt.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-dev</artifactId>
             <version>${gwt.version}</version>
             <scope>test</scope>
@@ -179,7 +179,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.21.0</version>
+                <version>${maven.surfire.plugin}</version>
                 <executions>
                     <execution>
                         <id>unit-tests</id>
@@ -190,6 +190,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <argLine>${test.jvm.flags}</argLine>
                     <includes>
                         <include>**/Test*.java</include>
                         <include>**/*Test.java</include>
@@ -321,6 +322,19 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>add-exports</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <properties>
+                <test.jvm.flags>
+                    --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
+                    --add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED
+                    --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+                </test.jvm.flags>
+            </properties>
         </profile>
     </profiles>
 </project>

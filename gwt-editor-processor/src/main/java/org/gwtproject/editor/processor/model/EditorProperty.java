@@ -17,6 +17,7 @@ package org.gwtproject.editor.processor.model;
 
 import com.google.auto.common.MoreElements;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -43,10 +44,12 @@ public class EditorProperty {
 
     private Stream.Builder<EditorProperty> builder = Stream.builder();
     private Stream<EditorProperty> stream;
+    private TypeMirror editorType;
 
-    public Builder(EditorTypes types, TypeMirror dataType) {
+    public Builder(EditorTypes types, TypeMirror dataType, TypeMirror editorType) {
       this.types = types;
       this.dataType = dataType;
+      this.editorType = editorType;
     }
 
     public Builder root(TypeMirror type) {
@@ -237,8 +240,16 @@ public class EditorProperty {
         if (!foundGetterForPart) {
           //        poison(noGetterMessage(path, proxyType));
           //          return;
-          throw new IllegalStateException(
-              "generation aborted! No getter exists for >>" + path + "<<");
+          String message =
+              "gwt-editor ==> generation aborted! No getter exists for >>"
+                  + path
+                  + "<< of owner >>"
+                  + owner.toString()
+                  + "<<";
+          if (Objects.nonNull(this.editorType)) {
+            message += " in editor >>" + this.editorType + "<<";
+          }
+          throw new IllegalStateException(message);
         }
       }
 
@@ -308,7 +319,7 @@ public class EditorProperty {
                                 property.editorType)
                             .get(2);
                     property.composedData =
-                        new Builder(types, dataType)
+                        new Builder(types, dataType, editorType)
                             .root(subEditorType)
                             .build(Optional.of(property))
                             .get(0);

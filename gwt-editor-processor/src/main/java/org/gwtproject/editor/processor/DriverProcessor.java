@@ -20,13 +20,30 @@ import static java.util.stream.Collectors.toSet;
 import com.google.auto.common.MoreTypes;
 import com.google.auto.service.AutoService;
 import com.google.common.base.Stopwatch;
-import com.squareup.javapoet.*;
+import com.squareup.javapoet.AnnotationSpec;
+import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.FieldSpec;
+import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.ParameterizedTypeName;
+import com.squareup.javapoet.TypeName;
+import com.squareup.javapoet.TypeSpec;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringJoiner;
 import java.util.stream.Stream;
-import javax.annotation.processing.*;
+import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.Filer;
+import javax.annotation.processing.Messager;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.Processor;
+import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
@@ -164,6 +181,10 @@ public class DriverProcessor extends AbstractProcessor {
             .addModifiers(Modifier.PUBLIC)
             .returns(void.class)
             .addAnnotation(Override.class)
+            .addAnnotation(
+                AnnotationSpec.builder(SuppressWarnings.class)
+                    .addMember("value", "$S", "unchecked")
+                    .build())
             .addParameter(EditorVisitor.class, "visitor")
             // ugly cast to shut up java warnings at compile time - however, this might be overkill,
             // could just use raw types
@@ -240,6 +261,10 @@ public class DriverProcessor extends AbstractProcessor {
   /**
    * Joins the name of the type with any enclosing types, with "_" as the delimeter, and appends an
    * optional suffix.
+   *
+   * @param interfaceToImplement TypeElement of the interface to implement
+   * @param suffix suffix to use or null (no suffix)
+   * @return created name
    */
   protected String createNameFromEnclosedTypes(TypeElement interfaceToImplement, String suffix) {
     StringJoiner joiner = new StringJoiner("_", "", suffix == null ? "" : suffix);
@@ -272,22 +297,38 @@ public class DriverProcessor extends AbstractProcessor {
         TypeSpec.classBuilder(delegateSimpleName)
             .addOriginatingElement(types.asElement(data.getEditedType()))
             .addOriginatingElement(types.asElement(data.getEditorType()))
-            .addModifiers(Modifier.PUBLIC)
-            // Once GWT supports the new package of the Generated class
-            // we can uncomment this code
-            //              .addAnnotation(
-            //                  AnnotationSpec.builder(getGeneratedClassName())
-            //                      .addMember("value", "\"$L\"",
-            // DriverProcessor.class.getCanonicalName())
-            //                      .build())
-            .superclass(getEditorDelegateType()); // raw type here, for the same reason as above
+            .addModifiers(Modifier.PUBLIC);
+    // Once GWT supports the new package of the Generated class
+    // we can uncomment this code
+    //              .addAnnotation(
+    //                  AnnotationSpec.builder(getGeneratedClassName())
+    //                      .addMember("value", "\"$L\"",
+    // DriverProcessor.class.getCanonicalName())
+    //                      .build())
+    if (data.getEditedType() != null && data.getEditorType() != null) {
+      ParameterizedTypeName delegateType =
+          ParameterizedTypeName.get(
+              getEditorDelegateType(),
+              TypeName.get(data.getEditedType()),
+              TypeName.get(data.getEditorType()));
+      delegateTypeBuilder.superclass(delegateType);
+    } else {
+      delegateTypeBuilder.superclass(getEditorDelegateType());
+    }
 
     NameFactory names = new NameFactory();
     Map<EditorProperty, String> delegateFields = new IdentityHashMap<>();
 
-    delegateTypeBuilder.addField(
-        FieldSpec.builder(rawEditorType, "editor", Modifier.PRIVATE).build());
-    names.addName("editor");
+    if (data.getEditorType() != null) {
+      delegateTypeBuilder.addField(
+          FieldSpec.builder(ClassName.get(data.getEditorType()), "editor", Modifier.PRIVATE)
+              .build());
+      names.addName("editor");
+    } else {
+      delegateTypeBuilder.addField(
+          FieldSpec.builder(rawEditorType, "editor", Modifier.PRIVATE).build());
+      names.addName("editor");
+    }
     delegateTypeBuilder.addField(
         FieldSpec.builder(ClassName.get(data.getEditedType()), "object", Modifier.PRIVATE).build());
     names.addName("object");
@@ -298,26 +339,48 @@ public class DriverProcessor extends AbstractProcessor {
         String fieldName = names.createName(d.getPropertyName() + "Delegate");
         delegateFields.put(d, fieldName);
         delegateTypeBuilder.addField(
-            getEditorDelegateType(), fieldName, Modifier.PRIVATE); // TODO parameterize
+            ParameterizedTypeName.get(
+                getEditorDelegateType(),
+                TypeName.get(d.getEditedType()),
+                TypeName.get(d.getEditorType())),
+            fieldName,
+            Modifier.PRIVATE);
       }
     }
 
-    delegateTypeBuilder.addMethod(
-        MethodSpec.methodBuilder("getEditor")
-            .addModifiers(Modifier.PROTECTED)
-            .returns(rawEditorType)
-            .addAnnotation(Override.class)
-            .addStatement("return editor")
-            .build());
-
-    delegateTypeBuilder.addMethod(
-        MethodSpec.methodBuilder("setEditor")
-            .addModifiers(Modifier.PROTECTED)
-            .returns(void.class)
-            .addAnnotation(Override.class)
-            .addParameter(Editor.class, "editor")
-            .addStatement("this.editor = ($T) editor", rawEditorType)
-            .build());
+    if (data.getEditorType() != null) {
+      delegateTypeBuilder.addMethod(
+          MethodSpec.methodBuilder("getEditor")
+              .addModifiers(Modifier.PROTECTED)
+              .returns(ClassName.get(data.getEditorType()))
+              .addAnnotation(Override.class)
+              .addStatement("return editor")
+              .build());
+      delegateTypeBuilder.addMethod(
+          MethodSpec.methodBuilder("setEditor")
+              .addModifiers(Modifier.PROTECTED)
+              .returns(void.class)
+              .addAnnotation(Override.class)
+              .addParameter(ClassName.get(data.getEditorType()), "editor")
+              .addStatement("this.editor = editor")
+              .build());
+    } else {
+      delegateTypeBuilder.addMethod(
+          MethodSpec.methodBuilder("getEditor")
+              .addModifiers(Modifier.PROTECTED)
+              .returns(rawEditorType)
+              .addAnnotation(Override.class)
+              .addStatement("return editor")
+              .build());
+      delegateTypeBuilder.addMethod(
+          MethodSpec.methodBuilder("setEditor")
+              .addModifiers(Modifier.PROTECTED)
+              .returns(void.class)
+              .addAnnotation(Override.class)
+              .addParameter(Editor.class, "editor")
+              .addStatement("this.editor = editor")
+              .build());
+    }
 
     delegateTypeBuilder.addMethod(
         MethodSpec.methodBuilder("getObject")
@@ -327,14 +390,25 @@ public class DriverProcessor extends AbstractProcessor {
             .addStatement("return object")
             .build());
 
-    delegateTypeBuilder.addMethod(
-        MethodSpec.methodBuilder("setObject")
-            .addModifiers(Modifier.PROTECTED)
-            .returns(void.class)
-            .addAnnotation(Override.class)
-            .addParameter(ClassName.get(Object.class), "object")
-            .addStatement("this.object = ($T) object", ClassName.get(data.getEditedType()))
-            .build());
+    if (data.getEditedType() != null) {
+      delegateTypeBuilder.addMethod(
+          MethodSpec.methodBuilder("setObject")
+              .addModifiers(Modifier.PROTECTED)
+              .returns(void.class)
+              .addAnnotation(Override.class)
+              .addParameter(ClassName.get(data.getEditedType()), "object")
+              .addStatement("this.object = object")
+              .build());
+    } else {
+      delegateTypeBuilder.addMethod(
+          MethodSpec.methodBuilder("setObject")
+              .addModifiers(Modifier.PROTECTED)
+              .returns(void.class)
+              .addAnnotation(Override.class)
+              .addParameter(ClassName.get(Object.class), "object")
+              .addStatement("this.object = ($T) object", ClassName.get(data.getEditedType()))
+              .build());
+    }
 
     MethodSpec.Builder initializeSubDelegatesBuilder =
         MethodSpec.methodBuilder("initializeSubDelegates")
@@ -520,18 +594,49 @@ public class DriverProcessor extends AbstractProcessor {
         MethodSpec.methodBuilder("checkAssignment")
             .addModifiers(Modifier.PUBLIC)
             .addAnnotation(Override.class)
+            .addAnnotation(
+                AnnotationSpec.builder(SuppressWarnings.class)
+                    .addMember("value", "$S", "unchecked")
+                    .build())
             .returns(ClassName.get(data.getEditedType()))
             .addParameter(Object.class, "value")
             .addStatement("return ($T) value", ClassName.get(data.getEditedType()))
             .build());
 
-    contextTypeBuilder.addMethod(
-        MethodSpec.methodBuilder("getEditedType")
-            .addModifiers(Modifier.PUBLIC)
-            .addAnnotation(Override.class)
-            .returns(Class.class)
-            .addStatement("return $L.class", MoreTypes.asElement(data.getEditedType()))
-            .build());
+    if (MoreTypes.asDeclared(data.getEditorType()).getTypeArguments().size() > 1) {
+      contextTypeBuilder.addMethod(
+          MethodSpec.methodBuilder("getEditedType")
+              .addModifiers(Modifier.PUBLIC)
+              .addAnnotation(Override.class)
+              .addAnnotation(
+                  AnnotationSpec.builder(SuppressWarnings.class)
+                      .addMember("value", "$S", "unchecked")
+                      .build())
+              .returns(
+                  ParameterizedTypeName.get(
+                      ClassName.get(Class.class), ClassName.get(data.getEditedType())))
+              .addStatement(
+                  "return ($T<$T>) ($T) $L.class",
+                  ClassName.get(Class.class),
+                  ClassName.get(data.getEditedType()),
+                  ClassName.get(Class.class),
+                  MoreTypes.asElement(data.getEditedType()))
+              .build());
+    } else {
+      contextTypeBuilder.addMethod(
+          MethodSpec.methodBuilder("getEditedType")
+              .addModifiers(Modifier.PUBLIC)
+              .addAnnotation(Override.class)
+              .addAnnotation(
+                  AnnotationSpec.builder(SuppressWarnings.class)
+                      .addMember("value", "$S", "unchecked")
+                      .build())
+              .returns(
+                  ParameterizedTypeName.get(
+                      ClassName.get(Class.class), ClassName.get(data.getEditedType())))
+              .addStatement("return $L.class", MoreTypes.asElement(data.getEditedType()))
+              .build());
+    }
 
     contextTypeBuilder.addMethod(
         MethodSpec.methodBuilder("getFromModel")

@@ -65,7 +65,7 @@ public final class ConstraintViolationImpl<T> implements ConstraintViolation<T>,
     } else if (!(o instanceof ConstraintViolationImpl)) {
       return false;
     } else {
-      ConstraintViolationImpl<?> other = (ConstraintViolationImpl) o;
+      ConstraintViolationImpl<?> other = (ConstraintViolationImpl<?>) o;
       return Objects.equals(this.message, other.message)
           && Objects.equals(this.propertyPath, other.propertyPath)
           && Objects.equals(this.rootBean, other.rootBean)

@@ -181,13 +181,12 @@ public class PersonComponent implements IsElement<HTMLDivElement>, Editor<Person
 
 ```java
 PersonComponent personComponent = new PersonComponent();
-
         Person person = new Person(10, "Ahmad", false);
-
-        DomGlobal.document.body.appendChild(Card.create()
-                .appendChild(personComponent)
-                .asElement());
-
+        DomGlobal.document
+                 .body
+                 .appendChild(Card.create()
+                                  .appendChild(personComponent)
+                                  .asElement());
         personComponent.edit(person);
         
 ```

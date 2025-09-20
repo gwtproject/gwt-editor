@@ -111,7 +111,7 @@ public class EditorModel {
         TypeMirror fieldClassType = field.asType();
         if (shouldExamine(fieldClassType)) {
           List<EditorProperty> data =
-              new EditorProperty.Builder(editorTypes, dataType)
+              new EditorProperty.Builder(editorTypes, dataType, editorType)
                   .access(field)
                   .build(Optional.ofNullable(editorSoFar));
           accumulateEditorData(data, flatData, toReturn);
@@ -145,7 +145,7 @@ public class EditorModel {
           }
 
           List<EditorProperty> data =
-              new EditorProperty.Builder(editorTypes, dataType)
+              new EditorProperty.Builder(editorTypes, dataType, editorType)
                   .access(method)
                   .build(Optional.ofNullable(editorSoFar));
           accumulateEditorData(data, flatData, toReturn);
@@ -162,7 +162,7 @@ public class EditorModel {
               .get(2);
 
       EditorProperty subEditor =
-          new EditorProperty.Builder(editorTypes, dataType)
+          new EditorProperty.Builder(editorTypes, dataType, editorType)
               .root(subEditorType)
               .build(Optional.ofNullable(editorSoFar))
               .get(0); // doesn't matter which instance, there must be at least one
@@ -266,7 +266,7 @@ public class EditorModel {
   }
 
   public EditorProperty getRootData() {
-    return new EditorProperty.Builder(editorTypes, dataType)
+    return new EditorProperty.Builder(editorTypes, dataType, editorType)
         .root(getEditorType())
         .build(Optional.empty())
         .get(0);
